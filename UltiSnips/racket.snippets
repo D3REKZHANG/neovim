@@ -1,0 +1,28 @@
+snippet header "CS assignment Racket header"
+;; 
+;; ***************************************************
+;; Derek Zhang (20890999)
+;; Assignment $1, Problem $2
+;; ***************************************************
+;;
+
+$0
+endsnippet 
+
+snippet ce "check expect template"
+(check-expect (${1:function}) $2) $0
+endsnippet
+
+snippet design "design recipe template"
+;; (${1:function} ${2:arguments}) ${3:purpose}
+;; Examples:
+(check-expect ($1 $4) $5)
+(check-expect ($1 $6) $7)
+
+;; $1: $8 -> $9
+(define ($1 $2)
+	$0)
+
+;; Tests:
+
+endsnippet

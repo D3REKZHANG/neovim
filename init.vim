@@ -5,12 +5,12 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'preservim/nerdtree'
     Plug 'patstockwell/vim-monokai-tasty'
     Plug 'lervag/vimtex'
-    Plug 'morhetz/gruvbox'
     Plug 'crusoexia/vim-monokai'
-    Plug 'sainnhe/sonokai'
     Plug 'wlangstroth/vim-racket'
     Plug 'jiangmiao/auto-pairs'
     Plug 'ryanoasis/vim-devicons'
+    Plug 'SirVer/ultisnips'
+    Plug 'junegunn/goyo.vim'
 call plug#end()
 
 " Plugins Config (in order) 
@@ -25,17 +25,24 @@ let g:tex_flavor = 'latex'
 let g:vimtex_view_general_viewer = 'sumatrapdf.exe'
 let g:vimtex_view_general_options = '@pdf'
 
-" The configuration options should be placed before `colorscheme sonokai`.
-let g:sonokai_style = 'shusia'
-let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 1
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 
-" --------------------------------------------------------------------------
+let g:UltiSnipsEditSplit="vertical"
+" ---------------------------------------------------------------------------
 
-" leader mapping
+" Leader Mapping ------------------------------------------------------------
+let mapleader = " "
+
+nnoremap <Leader>w :w<CR>
 nnoremap <Leader>f :NERDTreeToggle<CR>
-nnoremap <Leader>v :tabnew $MYVIMRC<CR>
+nnoremap <Leader>v :vsp $MYVIMRC<CR>
 nnoremap <Leader>vc :source $MYVIMRC<CR>
+nnoremap <Leader>sc :call UltiSnips#RefreshSnippets()<CR>
+nnoremap <Leader>go :Goyo<CR>
+nnoremap <Leader>al :AirlineToggle<CR>
+nnoremap <Leader>x /yeetdab<CR>
+nnoremap <Leader><space> i<space><esc>
 " --------------------------------------------------------------------------
 
 set number relativenumber
@@ -78,11 +85,17 @@ vnoremap j h
 vnoremap k j
 vnoremap l k
 vnoremap ; l
-
+vnoremap ' ;
 nnoremap j h
 nnoremap k j
 nnoremap l k
 nnoremap ; l
+nnoremap ' ;
+onoremap j h
+onoremap k j
+onoremap l k
+onoremap ; l
+onoremap ' ;
 
 nnoremap n b
 onoremap n b
@@ -92,10 +105,11 @@ onoremap b n
 vnoremap b n
 
 " wrap movement across lines
-:set whichwrap+=>,l
-:set whichwrap+=<,h
+set whichwrap+=>,l
+set whichwrap+=<,h
 
-nnoremap <Space> i<Space><esc>
+nnoremap <up> /
+
 
 if exists('g:loaded_webdevicons')
     call webdevicons#refresh()
