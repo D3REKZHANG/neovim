@@ -4,9 +4,10 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'preservim/nerdtree'
     Plug 'patstockwell/vim-monokai-tasty'
-    Plug 'lervag/vimtex'
     Plug 'crusoexia/vim-monokai'
+    Plug 'rakr/vim-one'
     Plug 'wlangstroth/vim-racket'
+    Plug 'lervag/vimtex'
     Plug 'jiangmiao/auto-pairs'
     Plug 'ryanoasis/vim-devicons'
     Plug 'SirVer/ultisnips'
@@ -51,7 +52,7 @@ set textwidth=150
 filetype plugin on
 
 syntax on
-colorscheme monokai 
+colorscheme one
 
 " Transparent vim background
 " hi Normal guibg=NONE ctermbg=NONE
@@ -60,8 +61,7 @@ colorscheme monokai
 
 set tabstop=4
 set shiftwidth=4
-set expandtab
-
+set expandtab 
 " tab control
 nnoremap t; :tabnext<CR>
 nnoremap tj :tabprev<CR>
@@ -110,8 +110,20 @@ set whichwrap+=<,h
 
 nnoremap <up> /
 
+" Scrolling
+nnoremap K L
+nnoremap L H
 
 if exists('g:loaded_webdevicons')
     call webdevicons#refresh()
 endif
 
+if (empty($TMUX))
+    if (has("nvim"))
+        "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+        let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    endif
+    if (has("termguicolors"))
+        set termguicolors
+    endif
+endif
