@@ -3,7 +3,7 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'preservim/nerdtree'
-    Plug 'patstockwell/vim-monokai-tasty'
+    Plug 'patstockwell/vim-monokai-tasty' 
     Plug 'crusoexia/vim-monokai'
     Plug 'rakr/vim-one'
     Plug 'wlangstroth/vim-racket'
@@ -44,6 +44,7 @@ nnoremap <Leader>go :Goyo<CR>
 nnoremap <Leader>al :AirlineToggle<CR>
 nnoremap <Leader>x /yeetdab<CR>
 nnoremap <Leader><space> i<space><esc>
+nnoremap <Leader>y "*y
 " --------------------------------------------------------------------------
 
 set number relativenumber
@@ -67,9 +68,9 @@ nnoremap t; :tabnext<CR>
 nnoremap tj :tabprev<CR>
 nnoremap tn :tabnew<CR>
 
-hi TablineSel ctermfg=yellow ctermbg=black  
-hi Tabline ctermfg=grey ctermbg=black
-hi TablineFill ctermbg=black     
+" hi TablineSel ctermfg=yellow ctermbg=black  
+" hi Tabline ctermfg=grey ctermbg=black
+" hi TablineFill ctermbg=black     
 
 " Pane control
 nnoremap <C-J> <C-W><C-H>
@@ -100,9 +101,9 @@ onoremap ' ;
 nnoremap n b
 onoremap n b
 vnoremap n b
-nnoremap b n
-onoremap b n
-vnoremap b n
+nnoremap m n
+onoremap m n
+vnoremap m n
 
 " wrap movement across lines
 set whichwrap+=>,l
