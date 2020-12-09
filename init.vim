@@ -12,6 +12,8 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'ryanoasis/vim-devicons'
     Plug 'SirVer/ultisnips'
     Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+    Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " Plugins Config (in order) 
@@ -42,13 +44,17 @@ nnoremap <Leader>vc :source $MYVIMRC<CR>
 nnoremap <Leader>sc :call UltiSnips#RefreshSnippets()<CR>
 nnoremap <Leader>go :Goyo<CR>
 nnoremap <Leader>al :AirlineToggle<CR>
-nnoremap <Leader>x /yeetdab<CR>
+nnoremap <silent><Leader>x /yeetdab<CR>
 nnoremap <Leader><space> i<space><esc>
 nnoremap <Leader>y "*y
+nnoremap <Leader>F :Files ~<CR>
+nnoremap <Leader>gf :GitFiles<CR>
+nnoremap <Leader>z <C-^>
+nnoremap <Leader>{ ^c${/**/}<esc>hhP
 " --------------------------------------------------------------------------
 
 set number relativenumber
-set textwidth=150
+" set textwidth=150
 
 filetype plugin on
 
@@ -73,37 +79,26 @@ nnoremap tn :tabnew<CR>
 " hi TablineFill ctermbg=black     
 
 " Pane control
-nnoremap <C-J> <C-W><C-H>
-nnoremap <C-K> <C-W><C-J>
-nnoremap <C-L> <C-W><C-K>
-nnoremap <C-W>; <C-W><C-L>
+nnoremap zj <C-w>h
+nnoremap zk <C-w>j
+nnoremap zl <C-w>k
+nnoremap z; <C-w>l
 
 set splitbelow
 set splitright
 
 " Movement
-vnoremap j h
-vnoremap k j
-vnoremap l k
-vnoremap ; l
-vnoremap ' ;
-nnoremap j h
-nnoremap k j
-nnoremap l k
-nnoremap ; l
-nnoremap ' ;
-onoremap j h
-onoremap k j
-onoremap l k
-onoremap ; l
-onoremap ' ;
+noremap j h
+noremap k gj
+noremap l gk
+noremap ; l
 
-nnoremap n b
-onoremap n b
-vnoremap n b
-nnoremap m n
-onoremap m n
-vnoremap m n
+noremap n b
+noremap m n
+noremap N B
+noremap M N
+
+noremap q %
 
 " wrap movement across lines
 set whichwrap+=>,l
