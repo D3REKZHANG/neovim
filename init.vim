@@ -14,6 +14,8 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
     Plug 'junegunn/fzf.vim'
+    Plug 'pangloss/vim-javascript'
+    Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
 " Plugins Config (in order) 
@@ -92,6 +94,7 @@ noremap j h
 noremap k gj
 noremap l gk
 noremap ; l
+noremap ' ;
 
 noremap n b
 noremap m n
@@ -104,7 +107,9 @@ noremap q %
 set whichwrap+=>,l
 set whichwrap+=<,h
 
+" Misc
 nnoremap <up> /
+noremap 0 ^
 
 " Scrolling
 nnoremap K L
