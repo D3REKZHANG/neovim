@@ -48,7 +48,6 @@ nnoremap <Leader>go :Goyo<CR>
 nnoremap <Leader>al :AirlineToggle<CR>
 nnoremap <silent><Leader>x /yeetdab<CR>
 nnoremap <Leader><space> i<space><esc>
-nnoremap <Leader>y "*y
 nnoremap <Leader>F :Files ~<CR>
 nnoremap <Leader>gf :GitFiles<CR>
 nnoremap <Leader>z <C-^>
