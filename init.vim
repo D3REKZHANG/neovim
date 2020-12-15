@@ -16,6 +16,7 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'pangloss/vim-javascript'
     Plug 'maxmellon/vim-jsx-pretty'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " Plugins Config (in order) 
@@ -34,6 +35,8 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 let g:UltiSnipsEditSplit="vertical"
+
+source config/coc.vim
 " ---------------------------------------------------------------------------
 
 " Leader Mapping ------------------------------------------------------------
