@@ -1,3 +1,6 @@
+ set shell=powershell shellquote=( shellpipe=\| shellredir=> shellxquote=
+ set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
+
 " Vim Plug
 call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'vim-airline/vim-airline'
@@ -8,7 +11,7 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'rakr/vim-one'
     Plug 'wlangstroth/vim-racket'
     Plug 'lervag/vimtex'
-    Plug 'jiangmiao/auto-pairs'
+    Plug 'jiangmiao/auto-pairs' 
     Plug 'ryanoasis/vim-devicons'
     Plug 'SirVer/ultisnips'
     Plug 'junegunn/goyo.vim'
@@ -17,6 +20,8 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'pangloss/vim-javascript'
     Plug 'maxmellon/vim-jsx-pretty'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'pprovost/vim-ps1'
+    Plug 'voldikss/vim-floaterm'
 call plug#end()
 
 " Plugins Config (in order) 
@@ -25,7 +30,7 @@ set noshowmode
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-let g:NERDTreeSortOrder = map(range(0, 25), '"\\." . nr2char(char2nr("a") + v:val) . "[^.]*$"')
+" let g:NERDTreeSortOrder = map(range(0, 25), '"\\." . nr2char(char2nr("a") + v:val) . "[^.]*$"')
 
 let g:tex_flavor = 'latex'
 let g:vimtex_view_general_viewer = 'sumatrapdf.exe'
@@ -36,7 +41,12 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 let g:UltiSnipsEditSplit="vertical"
 
-source config/coc.vim
+source ~/AppData/Local/nvim/config/coc.vim
+
+let g:floaterm_autoclose=1
+let g:floaterm_title=""
+let g:floaterm_shell="powershell.exe -NoLogo"
+tnoremap <Esc> <C-\><C-n>:FloatermToggle<CR>
 " ---------------------------------------------------------------------------
 
 " Leader Mapping ------------------------------------------------------------
@@ -55,6 +65,8 @@ nnoremap <Leader>F :Files ~<CR>
 nnoremap <Leader>gf :GitFiles<CR>
 nnoremap <Leader>z <C-^>
 nnoremap <Leader>{ ^c${/**/}<esc>hhP
+nnoremap <Leader>t :FloatermToggle<CR>
+nnoremap <Leader>p "*p
 " --------------------------------------------------------------------------
 
 set number relativenumber
@@ -73,6 +85,7 @@ colorscheme one
 set tabstop=4
 set shiftwidth=4
 set expandtab 
+
 " tab control
 nnoremap t; :tabnext<CR>
 nnoremap tj :tabprev<CR>
@@ -98,12 +111,17 @@ noremap l gk
 noremap ; l
 noremap ' ;
 
+inoremap <C-k> <C-n>
+inoremap <C-l> <C-p>
+
 noremap n b
 noremap m n
 noremap N B
 noremap M N
 
 noremap q %
+
+noremap g; g;zz
 
 " wrap movement across lines
 set whichwrap+=>,l
@@ -114,8 +132,11 @@ nnoremap <up> /
 noremap 0 ^
 
 " Scrolling
-nnoremap K L
-nnoremap L H
+nnoremap K L}
+nnoremap L H{
+
+" Unbind
+map <PageDown> <nop>
 
 if exists('g:loaded_webdevicons')
     call webdevicons#refresh()
