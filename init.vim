@@ -1,6 +1,3 @@
- set shell=powershell shellquote=( shellpipe=\| shellredir=> shellxquote=
- set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
-
 " Vim Plug
 call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'vim-airline/vim-airline'
@@ -22,6 +19,7 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'pprovost/vim-ps1'
     Plug 'voldikss/vim-floaterm'
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 call plug#end()
 
 " Plugins Config (in order) 
@@ -46,7 +44,8 @@ source ~/AppData/Local/nvim/config/coc.vim
 let g:floaterm_autoclose=1
 let g:floaterm_title=""
 let g:floaterm_shell="powershell.exe -NoLogo"
-tnoremap <Esc> <C-\><C-n>:FloatermToggle<CR>
+let g:floaterm_wintype = 'normal'
+tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 " ---------------------------------------------------------------------------
 
 " Leader Mapping ------------------------------------------------------------
@@ -60,7 +59,7 @@ nnoremap <Leader>sc :call UltiSnips#RefreshSnippets()<CR>
 nnoremap <Leader>go :Goyo<CR>
 nnoremap <Leader>al :AirlineToggle<CR>
 nnoremap <silent><Leader>x /yeetdab<CR>
-nnoremap <Leader><space> i<space><esc>
+nnoremap <Leader><space> a<space><esc>
 nnoremap <Leader>F :Files ~<CR>
 nnoremap <Leader>gf :GitFiles<CR>
 nnoremap <Leader>z <C-^>
@@ -121,7 +120,7 @@ noremap M N
 
 noremap q %
 
-noremap g; g;zz
+" noremap g; g;zz
 
 " wrap movement across lines
 set whichwrap+=>,l
@@ -151,3 +150,5 @@ if (empty($TMUX))
         set termguicolors
     endif
 endif
+
+hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg

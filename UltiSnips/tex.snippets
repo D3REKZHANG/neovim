@@ -8,12 +8,28 @@ snippet template
 \setlength{\parskip}{1.5ex}
 
 
-\usepackage{amsfonts,amsmath,amssymb,enumerate,mathtools}
+\usepackage{amsfonts,amsmath,amssymb,enumerate,mathtools, multicol}
+
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\newcommand{\0}{\boldsymbol 0}
+\newcommand{\vv}{\boldsymbol v}
+\newcommand{\x}{\boldsymbol x}
+\newcommand{\y}{\boldsymbol y}
+\newcommand{\z}{\boldsymbol z}
+\newcommand{\w}{\boldsymbol w}
+\newcommand{\n}{\boldsymbol n}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
 
 \begin{document}
 \parindent=0pt
 
-\textbf{MATH 13$1 Fall 2020: Written Assignment $2 \\Derek Zhang (20890999)\\$3}
+\textbf{MATH 13$1 Winter 2021: Written Assignment $2 \\\Derek Zhang (20890999)\\\\$3}
 
 $0
 
@@ -26,8 +42,13 @@ snippet flalign
 \end{flalign}
 endsnippet
 
-snippet non
+snippet nonn
 \nonumber &\\\
+$0
+endsnippet
+
+snippet non
+\nonumber \\\
 $0
 endsnippet
 
@@ -40,3 +61,23 @@ snippet table
 \end{tabular}
 \end{center}
 endsnippet
+
+snippet enumerate
+\begin{enumerate}[($1)]
+	\item
+		$0
+\end{enumerate}
+endsnippet
+
+snippet align
+\begin{align}
+	$0
+\end{align}
+endsnippet
+
+snippet amatrix
+\[\begin{amatrix}{$1}
+	$0
+\end{amatrix}\]
+endsnippet
+
