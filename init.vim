@@ -66,6 +66,8 @@ nnoremap <Leader>z <C-^>
 nnoremap <Leader>{ ^c${/**/}<esc>hhP
 nnoremap <Leader>t :FloatermToggle<CR>
 nnoremap <Leader>p "*p
+nnoremap <Leader>m ma
+nnoremap <Leader>; `a
 " --------------------------------------------------------------------------
 
 set number relativenumber
