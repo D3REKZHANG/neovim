@@ -106,11 +106,13 @@ set splitbelow
 set splitright
 
 " Movement
-noremap j h
-noremap k gj
-noremap l gk
-noremap ; l
-noremap ' ;
+" noremap j h
+" noremap k gj
+" noremap l gk
+" noremap ; l
+" noremap ' ;
+noremap j gj
+noremap k gk
 
 inoremap <C-k> <C-n>
 inoremap <C-l> <C-p>
@@ -135,6 +137,8 @@ noremap 0 ^
 " Scrolling
 nnoremap K L}
 nnoremap L H{
+
+set mouse=a
 
 " Unbind
 map <PageDown> <nop>
