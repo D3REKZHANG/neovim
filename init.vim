@@ -39,11 +39,14 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 let g:UltiSnipsEditSplit="vertical"
 
-source ~/AppData/Local/nvim/config/coc.vim
+if has("win32")
+    source ~/AppData/Local/nvim/config/coc.vim
+else
+    source ~/.config/nvim/config/coc.vim
+endif
 
 let g:floaterm_autoclose=1
 let g:floaterm_title=""
-let g:floaterm_shell="powershell.exe -NoLogo"
 let g:floaterm_wintype = 'normal'
 tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 " ---------------------------------------------------------------------------
@@ -138,6 +141,7 @@ noremap 0 ^
 nnoremap K L}
 nnoremap L H{
 
+" Mouse
 set mouse=a
 
 " Unbind
