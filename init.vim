@@ -88,8 +88,8 @@ set shiftwidth=4
 set expandtab 
 
 " tab control
-nnoremap t; :tabnext<CR>
-nnoremap tj :tabprev<CR>
+nnoremap th :tabnext<CR>
+nnoremap tl :tabprev<CR>
 nnoremap tn :tabnew<CR>
 
 " hi TablineSel ctermfg=yellow ctermbg=black  
@@ -97,10 +97,10 @@ nnoremap tn :tabnew<CR>
 " hi TablineFill ctermbg=black     
 
 " Pane control
-nnoremap zj <C-w>h
-nnoremap zk <C-w>j
-nnoremap zl <C-w>k
-nnoremap z; <C-w>l
+nnoremap zh <C-w>h
+nnoremap zj <C-w>j
+nnoremap zk <C-w>k
+nnoremap zl <C-w>l
 
 set splitbelow
 set splitright
