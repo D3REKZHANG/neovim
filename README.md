@@ -7,6 +7,9 @@ Notable key rebinds:
 - `b -> n` and `n -> m` for easier reach and better ergonomics (assuming touch typist resting right hand on `jkl;`)
 - `% -> q` since I jump brackets very often (q is easy to hit with left pinky)
 
+Notable plugins:
+- `vim-airline` for spiffy status bar
+- `vim-smoothie` makes `<ctrl-d> <ctrl-u>` scrolling usable
 
 Requires Vim Plug as a plugin manager. 
 
