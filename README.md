@@ -9,7 +9,7 @@ Notable key rebinds:
 
 Notable plugins:
 - `vim-airline` for spiffy status bar
-- `vim-smoothie` makes `<ctrl-d> <ctrl-u>` scrolling usable
+- `vim-smoothie` makes scrolling with `<ctrl-d> <ctrl-u>` usable
 
 Requires Vim Plug as a plugin manager. 
 
