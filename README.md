@@ -8,8 +8,8 @@ Notable key rebinds:
 - `% -> q` since I jump brackets very often (q is easy to hit with left pinky)
 
 Notable plugins:
-- `vim-airline` for spiffy status bar
 - `vim-smoothie` makes scrolling with `<ctrl-d> <ctrl-u>` usable
+- `vim-floaterm` is a really clean floating terminal within vim
 
 Requires Vim Plug as a plugin manager. 
 
