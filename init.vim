@@ -16,11 +16,12 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'pangloss/vim-javascript'
     Plug 'maxmellon/vim-jsx-pretty'
-    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'pprovost/vim-ps1'
     Plug 'voldikss/vim-floaterm'
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
+    Plug 'psliwka/vim-smoothie'
 call plug#end()
 
 " Plugins Config (in order) 
@@ -41,9 +42,9 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsEditSplit="vertical"
 
 if has("win32")
-    "source ~/AppData/Local/nvim/config/coc.vim
+    source ~/AppData/Local/nvim/config/coc.vim
 else
-    "source ~/.config/nvim/config/coc.vim
+    source ~/.config/nvim/config/coc.vim
 endif
 
 let g:floaterm_autoclose=1
@@ -82,14 +83,24 @@ filetype plugin on
 syntax on
 colorscheme one
 
-" Transparent vim background
-" hi Normal guibg=NONE ctermbg=NONE
-" highlight clear cursorLineNR
-" highlight clear LineNr
+set noswapfile
+set incsearch
 
 set tabstop=4
 set shiftwidth=4
 set expandtab 
+
+set splitbelow
+set splitright
+
+" Mouse
+set mouse=a
+
+" Transparent vim background
+" hi Normal guibg=NONE ctermbg=NONE
+" highlight clear cursorLineNR
+" highlight clear LineNr
+"
 
 " tab control
 nnoremap th :tabnext<CR>
@@ -106,8 +117,6 @@ nnoremap zj <C-w>j
 nnoremap zk <C-w>k
 nnoremap zl <C-w>l
 
-set splitbelow
-set splitright
 
 " Movement
 " noremap j h
@@ -118,6 +127,7 @@ set splitright
 noremap j gj
 noremap k gk
 
+" completion selection
 inoremap <C-j> <C-n>
 inoremap <C-k> <C-p>
 
@@ -141,9 +151,6 @@ noremap 0 ^
 " Scrolling
 nnoremap K L}
 nnoremap L H{
-
-" Mouse
-set mouse=a
 
 " Unbind
 map <PageDown> <nop>
