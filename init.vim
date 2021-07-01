@@ -3,12 +3,10 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'preservim/nerdtree'
-    Plug 'patstockwell/vim-monokai-tasty' 
-    Plug 'crusoexia/vim-monokai'
     Plug 'rakr/vim-one'
     Plug 'wlangstroth/vim-racket'
     Plug 'lervag/vimtex'
-    Plug 'jiangmiao/auto-pairs' 
+    Plug 'jiangmiao/auto-pairs'
     Plug 'ryanoasis/vim-devicons'
     Plug 'SirVer/ultisnips'
     Plug 'junegunn/goyo.vim'
@@ -24,8 +22,12 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'psliwka/vim-smoothie'
 call plug#end()
 
-" Plugins Config (in order) 
-let g:airline_powerline_fonts = 1
+" Plugins Config (in order)
+let g:airline_powerline = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_section_z='Ln %l% '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#right_alt_sep = '|'
 set noshowmode
 
 let NERDTreeMinimalUI = 1
@@ -51,6 +53,8 @@ let g:floaterm_autoclose=1
 let g:floaterm_title=""
 let g:floaterm_wintype = 'normal'
 tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
+
+let g:highlightedyank_highlight_duration = 100
 " ---------------------------------------------------------------------------
 
 " Leader Mapping ------------------------------------------------------------
@@ -62,15 +66,13 @@ nnoremap <Leader>v :vsp $MYVIMRC<CR>
 nnoremap <Leader>vc :source $MYVIMRC<CR>
 nnoremap <Leader>sc :call UltiSnips#RefreshSnippets()<CR>
 nnoremap <Leader>go :Goyo<CR>
-nnoremap <Leader>al :AirlineToggle<CR>
-nnoremap <silent><Leader>x /yeetdab<CR>
-nnoremap <Leader><space> a<space><esc>
+nnoremap <silent><Leader>x :nohl<CR>
 nnoremap <Leader>F :Files ~<CR>
 nnoremap <Leader>gf :GitFiles<CR>
 nnoremap <Leader>z <C-^>
-nnoremap <Leader>{ ^c${/**/}<esc>hhP
 nnoremap <Leader>t :FloatermToggle<CR>
 nnoremap <Leader>p "*p
+nnoremap <Leader>y "+y
 nnoremap <Leader>m ma
 nnoremap <Leader>; `a
 " --------------------------------------------------------------------------
@@ -82,19 +84,25 @@ filetype plugin on
 
 syntax on
 colorscheme one
+let g:airline_theme='base16_spacemacs'
 
 set noswapfile
 set incsearch
+set inccommand=nosplit
+set hidden
+set scrolloff=1
 
 set tabstop=4
 set shiftwidth=4
-set expandtab 
+set expandtab
 
 set splitbelow
 set splitright
 
 " Mouse
 set mouse=a
+
+nnoremap <C-h> :%s/
 
 " Transparent vim background
 " hi Normal guibg=NONE ctermbg=NONE
@@ -103,13 +111,12 @@ set mouse=a
 "
 
 " tab control
-nnoremap th :tabnext<CR>
-nnoremap tl :tabprev<CR>
-nnoremap tn :tabnew<CR>
+nnoremap th :bp<CR>
+nnoremap tl :bn<CR>
 
-" hi TablineSel ctermfg=yellow ctermbg=black  
+" hi TablineSel ctermfg=yellow ctermbg=black
 " hi Tabline ctermfg=grey ctermbg=black
-" hi TablineFill ctermbg=black     
+" hi TablineFill ctermbg=black
 
 " Pane control
 nnoremap zh <C-w>h
@@ -117,28 +124,21 @@ nnoremap zj <C-w>j
 nnoremap zk <C-w>k
 nnoremap zl <C-w>l
 
-
-" Movement
-" noremap j h
-" noremap k gj
-" noremap l gk
-" noremap ; l
-" noremap ' ;
 noremap j gj
 noremap k gk
 
-" completion selection
+" auto-completion selection
 inoremap <C-j> <C-n>
 inoremap <C-k> <C-p>
 
+" Some ergonomic rebindings
+" NOTE: m (set mark) moved to <Leader>m 
 noremap n b
-noremap m n
 noremap N B
+noremap m n
 noremap M N
-
 noremap q %
-
-" noremap g; g;zz
+nnoremap Y y$
 
 " wrap movement across lines
 set whichwrap+=>,l
