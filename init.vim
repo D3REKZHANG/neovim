@@ -20,11 +20,14 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
     Plug 'psliwka/vim-smoothie'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'akinsho/nvim-bufferline.lua'
 call plug#end()
 
 " Plugins Config (in order)
 let g:airline_powerline = 1
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline_section_z='Ln %l% '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#right_alt_sep = '|'
@@ -53,8 +56,21 @@ let g:floaterm_autoclose=1
 let g:floaterm_title=""
 let g:floaterm_wintype = 'normal'
 tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
+if has("win32")
+    set shell=powershell shellquote=( shellpipe=\| shellredir=> shellxquote=
+    set shellcmdflag=-NoLogo
+endif
 
 let g:highlightedyank_highlight_duration = 100
+
+lua << EOF
+require("bufferline").setup{
+    options = {
+        offsets = {{filetype = "NvimTree", text_align = "left"}},
+    }
+}
+EOF
+
 " ---------------------------------------------------------------------------
 
 " Leader Mapping ------------------------------------------------------------
@@ -62,11 +78,12 @@ let mapleader = " "
 
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>f :NERDTreeToggle<CR>
-nnoremap <Leader>v :vsp $MYVIMRC<CR>
+nnoremap <Leader>v :e $MYVIMRC<CR>
 nnoremap <Leader>vc :source $MYVIMRC<CR>
 nnoremap <Leader>sc :call UltiSnips#RefreshSnippets()<CR>
 nnoremap <Leader>go :Goyo<CR>
 nnoremap <silent><Leader>x :nohl<CR>
+nnoremap <Leader>f :NvimTreeToggle<CR>
 nnoremap <Leader>F :Files ~<CR>
 nnoremap <Leader>gf :GitFiles<CR>
 nnoremap <Leader>z <C-^>
@@ -75,6 +92,7 @@ nnoremap <Leader>p "*p
 nnoremap <Leader>y "+y
 nnoremap <Leader>m ma
 nnoremap <Leader>; `a
+nnoremap <Leader><Tab> :BufferLinePick<CR>
 " --------------------------------------------------------------------------
 
 set number relativenumber
@@ -89,7 +107,6 @@ let g:airline_theme='base16_spacemacs'
 set noswapfile
 set incsearch
 set inccommand=nosplit
-set hidden
 set scrolloff=1
 
 set tabstop=4
@@ -170,3 +187,4 @@ if (empty($TMUX))
 endif
 
 hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+
