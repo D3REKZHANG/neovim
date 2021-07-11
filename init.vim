@@ -26,16 +26,8 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
 call plug#end()
 
 " Plugins Config (in order)
-let g:airline_powerline = 1
-let g:airline#extensions#tabline#enabled = 0
 let g:airline_section_z='Ln %l% '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#right_alt_sep = '|'
 set noshowmode
-
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-" let g:NERDTreeSortOrder = map(range(0, 25), '"\\." . nr2char(char2nr("a") + v:val) . "[^.]*$"')
 
 let g:tex_flavor = 'latex'
 let g:vimtex_view_general_viewer = 'sumatrapdf.exe'
@@ -55,11 +47,8 @@ endif
 let g:floaterm_autoclose=1
 let g:floaterm_title=""
 let g:floaterm_wintype = 'normal'
+let g:floaterm_shell = 'powershell.exe -NoLogo'
 tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
-if has("win32")
-    set shell=powershell shellquote=( shellpipe=\| shellredir=> shellxquote=
-    set shellcmdflag=-NoLogo
-endif
 
 let g:highlightedyank_highlight_duration = 100
 
