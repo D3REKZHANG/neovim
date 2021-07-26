@@ -2,7 +2,6 @@
 call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'preservim/nerdtree'
     Plug 'rakr/vim-one'
     Plug 'wlangstroth/vim-racket'
     Plug 'lervag/vimtex'
@@ -23,6 +22,7 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'akinsho/nvim-bufferline.lua'
+    Plug 'wakatime/vim-wakatime'
 call plug#end()
 
 " Plugins Config (in order)
@@ -74,7 +74,6 @@ nnoremap <Leader>go :Goyo<CR>
 nnoremap <silent><Leader>x :nohl<CR>
 nnoremap <Leader>f :NvimTreeToggle<CR>
 nnoremap <Leader>F :Files ~<CR>
-nnoremap <Leader>gf :GitFiles<CR>
 nnoremap <Leader>z <C-^>
 nnoremap <Leader>t :FloatermToggle<CR>
 nnoremap <Leader>p "*p
@@ -82,6 +81,12 @@ nnoremap <Leader>y "+y
 nnoremap <Leader>m ma
 nnoremap <Leader>; `a
 nnoremap <Leader><Tab> :BufferLinePick<CR>
+" --------------------------------------------------------------------------
+
+" CTRL Mappings ------------------------------------------------------------
+nnoremap <C-h> :%s/
+nnoremap <C-p> :GitFiles<CR>
+
 " --------------------------------------------------------------------------
 
 set number relativenumber
@@ -108,7 +113,6 @@ set splitright
 " Mouse
 set mouse=a
 
-nnoremap <C-h> :%s/
 
 " Transparent vim background
 " hi Normal guibg=NONE ctermbg=NONE
