@@ -22,16 +22,26 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'akinsho/nvim-bufferline.lua'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzy-native.nvim'
     Plug 'wakatime/vim-wakatime'
 call plug#end()
 
 " Plugins Config (in order)
-let g:airline_section_z='Ln %l% '
+
+let g:airline_section_z='Col %c% '
 set noshowmode
+set hidden
 
 let g:tex_flavor = 'latex'
 let g:vimtex_view_general_viewer = 'sumatrapdf.exe'
 let g:vimtex_view_general_options = '@pdf'
+let g:vimtex_quickfix_ignore_filters = [
+  \'Overfull',
+  \]
+let g:vimtex_matchparen_enabled = 0
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -60,32 +70,28 @@ require("bufferline").setup{
 }
 EOF
 
+
 " ---------------------------------------------------------------------------
 
 " Leader Mapping ------------------------------------------------------------
 let mapleader = " "
 
 nnoremap <Leader>w :w<CR>
-nnoremap <Leader>f :NERDTreeToggle<CR>
 nnoremap <Leader>v :e $MYVIMRC<CR>
-nnoremap <Leader>vc :source $MYVIMRC<CR>
-nnoremap <Leader>sc :call UltiSnips#RefreshSnippets()<CR>
-nnoremap <Leader>go :Goyo<CR>
+nnoremap <Leader>so :source $MYVIMRC<CR>
+nnoremap <silent><Leader>go :Goyo<CR>
 nnoremap <silent><Leader>x :nohl<CR>
-nnoremap <Leader>f :NvimTreeToggle<CR>
-nnoremap <Leader>F :Files ~<CR>
-nnoremap <Leader>z <C-^>
-nnoremap <Leader>t :FloatermToggle<CR>
+nnoremap <silent><Leader>f :NvimTreeToggle<CR>
+nnoremap <silent><Leader>z <C-^>
+nnoremap <silent><Leader>t :FloatermToggle<CR>
 nnoremap <Leader>p "*p
 nnoremap <Leader>y "+y
-nnoremap <Leader>m ma
-nnoremap <Leader>; `a
-nnoremap <Leader><Tab> :BufferLinePick<CR>
-" --------------------------------------------------------------------------
-
-" CTRL Mappings ------------------------------------------------------------
-nnoremap <C-h> :%s/
-nnoremap <C-p> :GitFiles<CR>
+nnoremap <silent><Leader><Tab> :BufferLinePick<CR>
+nnoremap <Leader>q :bd<CR>
+nnoremap <Leader>h :%s/
+nnoremap <silent><Leader>F <cmd>Telescope git_files<cr>
+nnoremap <Leader>o o<ESC>
+nnoremap <Leader>c :call ToggleClear()<cr>
 
 " --------------------------------------------------------------------------
 
@@ -109,24 +115,33 @@ set expandtab
 
 set splitbelow
 set splitright
-
 " Mouse
 set mouse=a
 
+let g:bg_clear = 1
 
 " Transparent vim background
-" hi Normal guibg=NONE ctermbg=NONE
-" highlight clear cursorLineNR
-" highlight clear LineNr
-"
+function! ToggleClear()
+    if g:bg_clear
+        let g:bg_clear = 0
+        hi! EndOfBuffer ctermbg=16 ctermfg=16 guibg=#282c34 guifg=#282c34
+        hi Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#282c34
+        " hi LineNr ctermfg=59 guifg=#4b5263
+        "hi cursorLineNr ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#2c323c
+    else
+        let g:bg_clear = 1
+        hi Normal guibg=NONE ctermbg=NONE
+        hi! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=NONE guifg=#282c34
+        " hi clear cursorLineNR
+        " hi clear LineNr
+    endif
+endfunction
+
+call ToggleClear()
 
 " tab control
 nnoremap th :bp<CR>
 nnoremap tl :bn<CR>
-
-" hi TablineSel ctermfg=yellow ctermbg=black
-" hi Tabline ctermfg=grey ctermbg=black
-" hi TablineFill ctermbg=black
 
 " Pane control
 nnoremap zh <C-w>h
@@ -141,29 +156,18 @@ noremap k gk
 inoremap <C-j> <C-n>
 inoremap <C-k> <C-p>
 
-" Some ergonomic rebindings
-" NOTE: m (set mark) moved to <Leader>m 
-noremap n b
-noremap N B
-noremap m n
-noremap M N
-noremap q %
-nnoremap Y y$
-
 " wrap movement across lines
 set whichwrap+=>,l
 set whichwrap+=<,h
 
 " Misc
-nnoremap <up> /
 noremap 0 ^
+noremap q %
+nnoremap Y y$
 
-" Scrolling
-nnoremap K L}
-nnoremap L H{
-
-" Unbind
-map <PageDown> <nop>
+" Search
+set nohlsearch nowrapscan
+nnoremap <silent> <c-_> :set hlsearch!<cr>
 
 if exists('g:loaded_webdevicons')
     call webdevicons#refresh()
@@ -178,6 +182,3 @@ if (empty($TMUX))
         set termguicolors
     endif
 endif
-
-hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
-

@@ -1,6 +1,6 @@
 snippet template
 \documentclass[11pt]{article}
-\textwidth 15cm 
+\textwidth 15cm
 \textheight 21.3cm
 \evensidemargin 6mm
 \oddsidemargin 6mm
@@ -8,7 +8,8 @@ snippet template
 \setlength{\parskip}{1.5ex}
 
 
-\usepackage{amsfonts,amsmath,amssymb,enumerate,mathtools, multicol}
+\usepackage{amsfonts,amsmath,amssymb,enumerate,mathtools, multicol, graphicx}
+\usepackage[margin=0.$1in]{geometry}
 
 \newenvironment{amatrix}[1]{%
   \left(\begin{array}{@{}*{#1}{c}|c@{}}
@@ -16,21 +17,26 @@ snippet template
   \end{array}\right)
 }
 
-\newcommand{\0}{\boldsymbol 0}
-\newcommand{\vv}{\boldsymbol v}
-\newcommand{\x}{\boldsymbol x}
-\newcommand{\y}{\boldsymbol y}
-\newcommand{\z}{\boldsymbol z}
-\newcommand{\w}{\boldsymbol w}
-\newcommand{\n}{\boldsymbol n}
-\newcommand{\bb}{\boldsymbol b}
 \newcommand{\R}{\mathbb R}
 \newcommand{\C}{\mathbb C}
+
+\newcommand{\tautimplies}{\vDash}
+\newcommand{\tautimplied}{\mathrel{\text{\reflectbox{$\vDash$}}}}
+\newcommand{\tauteq}{%
+  \tautimplies
+  \mathrel{\mspace{-10mu}}%
+  \tautimplied
+}
+\newcommand{\vdashv}{%
+  \vdash
+  \mathrel{\mspace{-10mu}}%
+  \dashv
+}
 
 \begin{document}
 \parindent=0pt
 
-\textbf{MATH 13$1 Winter 2021: Written Assignment $2 \\\Derek Zhang (20890999)\\\\$3}
+\textbf{CS 245 Fall 2021: Crowdmark Assignment $2 \\\Derek Zhang (20890999)\\\\$3}
 
 $0
 
@@ -90,5 +96,11 @@ endsnippet
 
 snippet imatrix
 \begin{pmatrix} $0 \end{pmatrix}
+endsnippet
+
+snippet verbatim
+\begin{verbatim}
+$0
+\end{verbatim}
 endsnippet
 
