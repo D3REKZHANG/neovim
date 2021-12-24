@@ -1,37 +1,44 @@
 " Vim Plug
 call plug#begin('~/AppData/Local/nvim-data/plugged')
+    " Aesthetics
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'rakr/vim-one'
-    Plug 'wlangstroth/vim-racket'
-    Plug 'lervag/vimtex'
-    Plug 'jiangmiao/auto-pairs'
+    Plug 'arcticicestudio/nord-vim'
     Plug 'ryanoasis/vim-devicons'
+    Plug 'kyazdani42/nvim-web-devicons'
+
+    " Utility
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'jiangmiao/auto-pairs'
     Plug 'SirVer/ultisnips'
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
     Plug 'junegunn/fzf.vim'
-    Plug 'pangloss/vim-javascript'
-    Plug 'maxmellon/vim-jsx-pretty'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'pprovost/vim-ps1'
-    Plug 'voldikss/vim-floaterm'
-    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-    Plug 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
     Plug 'psliwka/vim-smoothie'
-    Plug 'kyazdani42/nvim-web-devicons'
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'akinsho/nvim-bufferline.lua'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-telescope/telescope-fzy-native.nvim'
-    Plug 'wakatime/vim-wakatime'
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+    Plug 'dstein64/vim-startuptime'
+
+    " Syntax
+    Plug 'wlangstroth/vim-racket'
+    Plug 'lervag/vimtex'
+    Plug 'pangloss/vim-javascript'
+    Plug 'maxmellon/vim-jsx-pretty'
+    Plug 'pprovost/vim-ps1'
+    Plug 'voldikss/vim-floaterm'
+    Plug 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
 call plug#end()
 
 " Plugins Config (in order)
 
 let g:airline_section_z='Col %c% '
+let airline#extensions#nvimlsp#enabled=0
 set noshowmode
 set hidden
 
@@ -60,7 +67,7 @@ let g:floaterm_wintype = 'normal'
 let g:floaterm_shell = 'powershell.exe -NoLogo'
 tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
-let g:highlightedyank_highlight_duration = 100
+
 
 lua << EOF
 require("bufferline").setup{
@@ -81,7 +88,6 @@ nnoremap <Leader>v :e $MYVIMRC<CR>
 nnoremap <Leader>so :source $MYVIMRC<CR>
 nnoremap <silent><Leader>go :Goyo<CR>
 nnoremap <silent><Leader>x :nohl<CR>
-nnoremap <silent><Leader>f :NvimTreeToggle<CR>
 nnoremap <silent><Leader>z <C-^>
 nnoremap <silent><Leader>t :FloatermToggle<CR>
 nnoremap <Leader>p "*p
@@ -89,8 +95,10 @@ nnoremap <Leader>y "+y
 nnoremap <silent><Leader><Tab> :BufferLinePick<CR>
 nnoremap <Leader>q :bd<CR>
 nnoremap <Leader>h :%s/
-nnoremap <silent><Leader>F <cmd>Telescope git_files<cr>
+nnoremap <silent><Leader>f <cmd>Telescope git_files<cr>
+nnoremap <silent><Leader>F :NvimTreeToggle<CR>
 nnoremap <Leader>o o<ESC>
+nnoremap <Leader>O O<ESC>
 nnoremap <Leader>c :call ToggleClear()<cr>
 
 " --------------------------------------------------------------------------
@@ -100,8 +108,10 @@ set number relativenumber
 
 filetype plugin on
 
+" Colour scheme
 syntax on
-colorscheme one
+let g:nord_underline = 0
+colorscheme nord
 let g:airline_theme='base16_spacemacs'
 
 set noswapfile
@@ -172,6 +182,11 @@ nnoremap <silent> <c-_> :set hlsearch!<cr>
 if exists('g:loaded_webdevicons')
     call webdevicons#refresh()
 endif
+
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=100}
+augroup END
 
 if (empty($TMUX))
     if (has("nvim"))

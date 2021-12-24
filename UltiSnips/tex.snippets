@@ -1,21 +1,10 @@
 snippet template
 \documentclass[11pt]{article}
-\textwidth 15cm
-\textheight 21.3cm
-\evensidemargin 6mm
-\oddsidemargin 6mm
-\topmargin -1.1cm
+\textwidth 15cm \textheight 21.3cm
 \setlength{\parskip}{1.5ex}
-
+\usepackage[margin=0.8in]{geometry} % control margins
 
 \usepackage{amsfonts,amsmath,amssymb,enumerate,mathtools, multicol, graphicx}
-\usepackage[margin=0.$1in]{geometry}
-
-\newenvironment{amatrix}[1]{%
-  \left(\begin{array}{@{}*{#1}{c}|c@{}}
-}{%
-  \end{array}\right)
-}
 
 \newcommand{\R}{\mathbb R}
 \newcommand{\C}{\mathbb C}
@@ -36,7 +25,9 @@ snippet template
 \begin{document}
 \parindent=0pt
 
-\textbf{CS 245 Fall 2021: Crowdmark Assignment $2 \\\Derek Zhang (20890999)\\\\$3}
+\textbf{CS 245 Fall 2021: Final Crowdmark \\\Derek Zhang (20890999)\\\\Dec 20, 2021}
+
+Question $1
 
 $0
 
@@ -77,9 +68,14 @@ snippet enumerate
 endsnippet
 
 snippet align
-\begin{align}
+\begin{align*}
 	$0
-\end{align}
+\end{align*}
+endsnippet
+
+snippet fd
+&($1)&\quad $2 &\vdash $3 & $4 \\\
+$0
 endsnippet
 
 snippet amatrix
