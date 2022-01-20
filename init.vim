@@ -3,6 +3,7 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     " Aesthetics
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    "Plug 'nvim-lualine/lualine.nvim'
     Plug 'rakr/vim-one'
     Plug 'arcticicestudio/nord-vim'
     Plug 'ryanoasis/vim-devicons'
@@ -37,7 +38,7 @@ call plug#end()
 
 " Plugins Config (in order)
 
-let g:airline_section_z='Col %c% '
+let g:airline_section_z='%l%:%c% '
 let airline#extensions#nvimlsp#enabled=0
 set noshowmode
 set hidden
@@ -75,6 +76,13 @@ require("bufferline").setup{
         offsets = {{filetype = "NvimTree", text_align = "left"}},
     }
 }
+require'lualine'.setup{
+    options = { theme='nord' },
+    sections = {
+        lualine_a = { {'diagnostics', sources = {'coc'}} }
+    }
+}
+
 EOF
 
 
@@ -111,8 +119,8 @@ filetype plugin on
 " Colour scheme
 syntax on
 let g:nord_underline = 0
-colorscheme nord
-let g:airline_theme='base16_spacemacs'
+colorscheme one
+"let g:airline_theme='base16_spacemacs'
 
 set noswapfile
 set incsearch
