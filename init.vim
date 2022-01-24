@@ -76,14 +76,13 @@ require("bufferline").setup{
         offsets = {{filetype = "NvimTree", text_align = "left"}},
     }
 }
-require'lualine'.setup{
-    options = { theme='nord' },
-    sections = {
-        lualine_a = { {'diagnostics', sources = {'coc'}} }
-    }
-}
-
 EOF
+"require'lualine'.setup{
+"    options = { theme='nord' },
+"    sections = {
+"        lualine_a = { {'diagnostics', sources = {'coc'}} }
+"    }
+"}
 
 
 " ---------------------------------------------------------------------------
@@ -119,7 +118,7 @@ filetype plugin on
 " Colour scheme
 syntax on
 let g:nord_underline = 0
-colorscheme one
+colorscheme nord
 "let g:airline_theme='base16_spacemacs'
 
 set noswapfile
