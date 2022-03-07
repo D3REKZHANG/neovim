@@ -126,8 +126,8 @@ set incsearch
 set inccommand=nosplit
 set scrolloff=1
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 set splitbelow
@@ -184,7 +184,7 @@ nnoremap Y y$
 
 " Search
 set nohlsearch nowrapscan
-nnoremap <silent> <c-_> :set hlsearch!<cr>
+nnoremap <silent> <C-/> :set hlsearch!<cr>:set wrapscan!<cr>
 
 if exists('g:loaded_webdevicons')
     call webdevicons#refresh()
