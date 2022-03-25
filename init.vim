@@ -5,6 +5,8 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'vim-airline/vim-airline-themes'
     "Plug 'nvim-lualine/lualine.nvim'
     Plug 'rakr/vim-one'
+    Plug 'joshdick/onedark.vim'
+    Plug 'mangeshrex/everblush.vim'
     Plug 'arcticicestudio/nord-vim'
     Plug 'ryanoasis/vim-devicons'
     Plug 'kyazdani42/nvim-web-devicons'
@@ -25,6 +27,9 @@ call plug#begin('~/AppData/Local/nvim-data/plugged')
     Plug 'nvim-telescope/telescope-fzy-native.nvim'
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'dstein64/vim-startuptime'
+    Plug 'numToStr/FTerm.nvim'
+    Plug 'mlaursen/vim-react-snippets'
+    Plug 'akinsho/toggleterm.nvim'
 
     " Syntax
     Plug 'wlangstroth/vim-racket'
@@ -69,20 +74,22 @@ let g:floaterm_shell = 'powershell.exe -NoLogo'
 tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 
-
 lua << EOF
 require("bufferline").setup{
     options = {
         offsets = {{filetype = "NvimTree", text_align = "left"}},
     }
 }
+require("nvim-tree").setup{}
+require("FTerm").setup{}
 EOF
-"require'lualine'.setup{
+"require('lualine').setup{
 "    options = { theme='nord' },
 "    sections = {
 "        lualine_a = { {'diagnostics', sources = {'coc'}} }
 "    }
 "}
+"EOF
 
 
 " ---------------------------------------------------------------------------
@@ -90,23 +97,31 @@ EOF
 " Leader Mapping ------------------------------------------------------------
 let mapleader = " "
 
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>v :e $MYVIMRC<CR>
-nnoremap <Leader>so :source $MYVIMRC<CR>
-nnoremap <silent><Leader>go :Goyo<CR>
-nnoremap <silent><Leader>x :nohl<CR>
-nnoremap <silent><Leader>z <C-^>
-nnoremap <silent><Leader>t :FloatermToggle<CR>
-nnoremap <Leader>p "*p
-nnoremap <Leader>y "+y
-nnoremap <silent><Leader><Tab> :BufferLinePick<CR>
-nnoremap <Leader>q :bd<CR>
-nnoremap <Leader>h :%s/
-nnoremap <silent><Leader>f <cmd>Telescope git_files<cr>
-nnoremap <silent><Leader>F :NvimTreeToggle<CR>
-nnoremap <Leader>o o<ESC>
-nnoremap <Leader>O O<ESC>
-nnoremap <Leader>c :call ToggleClear()<cr>
+if exists('g:vscode')
+  nnoremap <leader>w <CMD>call VSCodeCall('workbench.action.files.save')<CR>
+else
+  nnoremap <leader>w :w<CR>
+  nnoremap <silent><leader>t :FloatermToggle<CR>
+  nnoremap <silent><leader><Tab> :BufferLinePick<CR>
+  nnoremap <leader>q :bd<CR>
+  nnoremap <silent><leader>f <cmd>Telescope git_files<cr>
+  nnoremap <silent><leader>e :NvimTreeToggle<CR>
+  nnoremap <leader>c :call ToggleClear()<cr>
+endif
+
+nnoremap <leader>v :e $MYVIMRC<CR>
+nnoremap <leader>so :source $MYVIMRC<CR>
+nnoremap <silent><leader>go :Goyo<CR>
+nnoremap <silent><leader>x :nohl<CR>
+nnoremap <silent><leader>z <C-^>
+nnoremap <leader>p "*p
+nnoremap <leader>y "+y
+nnoremap <leader>h :%s/
+nnoremap <leader>o o<ESC>
+nnoremap <leader>O O<ESC>
+
+nnoremap <leader>j :m .+1<cr>==
+nnoremap <leader>k :m .-2<cr>==
 
 " --------------------------------------------------------------------------
 
@@ -118,7 +133,8 @@ filetype plugin on
 " Colour scheme
 syntax on
 let g:nord_underline = 0
-colorscheme nord
+colorscheme one
+"set background=dark
 "let g:airline_theme='base16_spacemacs'
 
 set noswapfile
@@ -180,6 +196,7 @@ set whichwrap+=<,h
 " Misc
 noremap 0 ^
 noremap q %
+noremap Q q
 nnoremap Y y$
 
 " Search
