@@ -105,6 +105,7 @@ else
   nnoremap <silent><leader><Tab> :BufferLinePick<CR>
   nnoremap <leader>q :bd<CR>
   nnoremap <silent><leader>f <cmd>Telescope git_files<cr>
+  nnoremap <silent><C-p> <cmd>Telescope git_files<cr>
   nnoremap <silent><leader>e :NvimTreeToggle<CR>
   nnoremap <leader>c :call ToggleClear()<cr>
 endif
@@ -133,7 +134,7 @@ filetype plugin on
 " Colour scheme
 syntax on
 let g:nord_underline = 0
-colorscheme one
+colorscheme nord
 "set background=dark
 "let g:airline_theme='base16_spacemacs'
 
