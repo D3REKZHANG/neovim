@@ -1,78 +1,80 @@
 " Vim Plug
-call plug#begin('~/AppData/Local/nvim-data/plugged')
-    " Aesthetics
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    "Plug 'nvim-lualine/lualine.nvim'
-    Plug 'rakr/vim-one'
-    Plug 'joshdick/onedark.vim'
-    Plug 'mangeshrex/everblush.vim'
-    Plug 'arcticicestudio/nord-vim'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'kyazdani42/nvim-web-devicons'
+if !exists('g:vscode')
+  call plug#begin('~/AppData/Local/nvim-data/plugged')
+  " Aesthetics
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  "Plug 'nvim-lualine/lualine.nvim'
+  Plug 'rakr/vim-one'
+  Plug 'joshdick/onedark.vim'
+  Plug 'mangeshrex/everblush.vim'
+  Plug 'arcticicestudio/nord-vim'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'kyazdani42/nvim-web-devicons'
 
-    " Utility
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'SirVer/ultisnips'
-    Plug 'junegunn/goyo.vim'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
-    Plug 'junegunn/fzf.vim'
-    Plug 'psliwka/vim-smoothie'
-    Plug 'kyazdani42/nvim-tree.lua'
-    Plug 'akinsho/nvim-bufferline.lua'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'nvim-telescope/telescope-fzy-native.nvim'
-    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-    Plug 'dstein64/vim-startuptime'
-    Plug 'numToStr/FTerm.nvim'
-    Plug 'mlaursen/vim-react-snippets'
-    Plug 'akinsho/toggleterm.nvim'
+  " Utility
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'SirVer/ultisnips'
+  Plug 'junegunn/goyo.vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+  Plug 'junegunn/fzf.vim'
+  Plug 'psliwka/vim-smoothie'
+  Plug 'kyazdani42/nvim-tree.lua'
+  Plug 'akinsho/nvim-bufferline.lua'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-fzy-native.nvim'
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+  Plug 'dstein64/vim-startuptime'
+  Plug 'numToStr/FTerm.nvim'
+  Plug 'mlaursen/vim-react-snippets'
+  Plug 'akinsho/toggleterm.nvim'
+  Plug 'tpope/vim-surround'
 
-    " Syntax
-    Plug 'wlangstroth/vim-racket'
-    Plug 'lervag/vimtex'
-    Plug 'pangloss/vim-javascript'
-    Plug 'maxmellon/vim-jsx-pretty'
-    Plug 'pprovost/vim-ps1'
-    Plug 'voldikss/vim-floaterm'
-    Plug 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
-call plug#end()
-
-" Plugins Config (in order)
-
-let g:airline_section_z='%l%:%c% '
-let airline#extensions#nvimlsp#enabled=0
-set noshowmode
-set hidden
-
-let g:tex_flavor = 'latex'
-let g:vimtex_view_general_viewer = 'sumatrapdf.exe'
-let g:vimtex_view_general_options = '@pdf'
-let g:vimtex_quickfix_ignore_filters = [
-  \'Overfull',
-  \]
-let g:vimtex_matchparen_enabled = 0
-
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-
-let g:UltiSnipsEditSplit="vertical"
-
-if has("win32")
-    source ~/AppData/Local/nvim/config/coc.vim
-else
-    source ~/.config/nvim/config/coc.vim
+  " Syntax
+  Plug 'wlangstroth/vim-racket'
+  Plug 'lervag/vimtex'
+  Plug 'pangloss/vim-javascript'
+  Plug 'maxmellon/vim-jsx-pretty'
+  Plug 'pprovost/vim-ps1'
+  Plug 'voldikss/vim-floaterm'
+  Plug 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
+  call plug#end()
 endif
 
-let g:floaterm_autoclose=1
-let g:floaterm_title=""
-let g:floaterm_wintype = 'normal'
-let g:floaterm_shell = 'powershell.exe -NoLogo'
-tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
+" Plugins Config (in order)
+if !exists('g:vscode')
+  let g:airline_section_z='%l%:%c% '
+  let airline#extensions#nvimlsp#enabled=0
+  set noshowmode
+  set hidden
 
+  let g:tex_flavor = 'latex'
+  let g:vimtex_view_general_viewer = 'sumatrapdf.exe'
+  let g:vimtex_view_general_options = '@pdf'
+  let g:vimtex_quickfix_ignore_filters = [
+    \'Overfull',
+    \]
+  let g:vimtex_matchparen_enabled = 0
+
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<tab>"
+
+  let g:UltiSnipsEditSplit="vertical"
+
+  if has("win32")
+    source ~/AppData/Local/nvim/config/coc.vim
+  else
+    source ~/.config/nvim/config/coc.vim
+  endif
+
+  let g:floaterm_autoclose=1
+  let g:floaterm_title=""
+  let g:floaterm_wintype = 'normal'
+  let g:floaterm_shell = 'powershell.exe -NoLogo'
+  tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 lua << EOF
 require("bufferline").setup{
@@ -83,14 +85,7 @@ require("bufferline").setup{
 require("nvim-tree").setup{}
 require("FTerm").setup{}
 EOF
-"require('lualine').setup{
-"    options = { theme='nord' },
-"    sections = {
-"        lualine_a = { {'diagnostics', sources = {'coc'}} }
-"    }
-"}
-"EOF
-
+endif
 
 " ---------------------------------------------------------------------------
 
@@ -108,13 +103,13 @@ else
   nnoremap <silent><C-p> <cmd>Telescope git_files<cr>
   nnoremap <silent><leader>e :NvimTreeToggle<CR>
   nnoremap <leader>c :call ToggleClear()<cr>
+  nnoremap <silent><leader>z <C-^>
 endif
 
 nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<CR>
 nnoremap <silent><leader>go :Goyo<CR>
 nnoremap <silent><leader>x :nohl<CR>
-nnoremap <silent><leader>z <C-^>
 nnoremap <leader>p "*p
 nnoremap <leader>y "+y
 nnoremap <leader>h :%s/
@@ -133,8 +128,10 @@ filetype plugin on
 
 " Colour scheme
 syntax on
-let g:nord_underline = 0
-colorscheme nord
+if !exists('g:vscode')
+  let g:nord_underline = 0
+  colorscheme nord
+endif
 "set background=dark
 "let g:airline_theme='base16_spacemacs'
 
