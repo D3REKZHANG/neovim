@@ -1,11 +1,10 @@
 " Vim Plug
 if !exists('g:vscode')
   call plug#begin('~/AppData/Local/nvim-data/plugged')
+ 
+  Plug 'lewis6991/impatient.nvim'
+
   " Aesthetics
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  "Plug 'nvim-lualine/lualine.nvim'
-  Plug 'rakr/vim-one'
   Plug 'joshdick/onedark.vim'
   Plug 'mangeshrex/everblush.vim'
   Plug 'arcticicestudio/nord-vim'
@@ -13,41 +12,46 @@ if !exists('g:vscode')
   Plug 'kyazdani42/nvim-web-devicons'
 
   " Utility
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  "   Vimscript
+  "Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'jiangmiao/auto-pairs'
-  Plug 'SirVer/ultisnips'
   Plug 'junegunn/goyo.vim'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
   Plug 'junegunn/fzf.vim'
   Plug 'psliwka/vim-smoothie'
+  Plug 'dstein64/vim-startuptime'
+  Plug 'voldikss/vim-floaterm'
+  Plug 'tpope/vim-surround'
+  
+  "   Lua
+  Plug 'nvim-lualine/lualine.nvim'
   Plug 'kyazdani42/nvim-tree.lua'
   Plug 'akinsho/nvim-bufferline.lua'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
-  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-  Plug 'dstein64/vim-startuptime'
-  Plug 'numToStr/FTerm.nvim'
-  Plug 'mlaursen/vim-react-snippets'
-  Plug 'akinsho/toggleterm.nvim'
-  Plug 'tpope/vim-surround'
+  "Plug 'numToStr/FTerm.nvim'
+  "Plug 'akinsho/toggleterm.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'williamboman/nvim-lsp-installer'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
 
-  " Syntax
-  Plug 'wlangstroth/vim-racket'
-  Plug 'lervag/vimtex'
-  Plug 'pangloss/vim-javascript'
-  Plug 'maxmellon/vim-jsx-pretty'
-  Plug 'pprovost/vim-ps1'
-  Plug 'voldikss/vim-floaterm'
-  Plug 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
   call plug#end()
 endif
 
-" Plugins Config (in order)
+
+" Plugins Config
 if !exists('g:vscode')
-  let g:airline_section_z='%l%:%c% '
-  let airline#extensions#nvimlsp#enabled=0
+  lua require('impatient').enable_profile()
+
+  "let g:airline_section_z='%l%:%c% '
+  "let airline#extensions#nvimlsp#enabled=0
   set noshowmode
   set hidden
 
@@ -64,11 +68,11 @@ if !exists('g:vscode')
 
   let g:UltiSnipsEditSplit="vertical"
 
-  if has("win32")
-    source ~/AppData/Local/nvim/config/coc.vim
-  else
-    source ~/.config/nvim/config/coc.vim
-  endif
+  "if has("win32")
+  "  source ~/AppData/Local/nvim/config/coc.vim
+  "else
+  "  source ~/.config/nvim/config/coc.vim
+  "endif
 
   let g:floaterm_autoclose=1
   let g:floaterm_title=""
@@ -77,13 +81,21 @@ if !exists('g:vscode')
   tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 lua << EOF
-require("bufferline").setup{
-    options = {
-        offsets = {{filetype = "NvimTree", text_align = "left"}},
-    }
-}
-require("nvim-tree").setup{}
-require("FTerm").setup{}
+  require("bufferline").setup{
+      options = {
+          offsets = {{filetype = "NvimTree", text_align = "left"}},
+      }
+  }
+  require("lualine").setup{}
+  require("nvim-tree").setup{}
+  require'nvim-treesitter.configs'.setup {
+    ensure_installed = { "javascript", "typescript", "python" },
+    sync_install = false,
+    highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = false,
+    },
+  }
 EOF
 endif
 
@@ -130,6 +142,7 @@ filetype plugin on
 syntax on
 if !exists('g:vscode')
   let g:nord_underline = 0
+  let g:nord_italic = v:false
   colorscheme nord
 endif
 "set background=dark
@@ -199,7 +212,7 @@ nnoremap Y y$
 
 " Search
 set nohlsearch nowrapscan
-nnoremap <silent> <C-/> :set hlsearch!<cr>:set wrapscan!<cr>
+nnoremap <silent> <C-_> :set hlsearch!<cr>:set wrapscan!<cr>
 
 if exists('g:loaded_webdevicons')
     call webdevicons#refresh()
