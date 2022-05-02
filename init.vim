@@ -41,6 +41,8 @@ if !exists('g:vscode')
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/nvim-cmp'
+  Plug 'L3MON4D3/LuaSnip'
+  Plug 'saadparwaiz1/cmp_luasnip'
 
   call plug#end()
 endif
@@ -88,7 +90,7 @@ lua << EOF
   }
   require("lualine").setup{}
   require("nvim-tree").setup{}
-  require'nvim-treesitter.configs'.setup {
+  require("nvim-treesitter.configs").setup {
     ensure_installed = { "javascript", "typescript", "python" },
     sync_install = false,
     highlight = {
@@ -96,6 +98,8 @@ lua << EOF
       additional_vim_regex_highlighting = false,
     },
   }
+  require("user.cmp")
+  require("user.lsp")
 EOF
 endif
 
@@ -153,8 +157,8 @@ set incsearch
 set inccommand=nosplit
 set scrolloff=1
 
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 
 set splitbelow
