@@ -43,7 +43,8 @@ if !exists('g:vscode')
   Plug 'hrsh7th/nvim-cmp'
   Plug 'L3MON4D3/LuaSnip'
   Plug 'saadparwaiz1/cmp_luasnip'
-
+  Plug 'lervag/vimtex'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
   call plug#end()
 endif
 
@@ -58,10 +59,17 @@ if !exists('g:vscode')
   set hidden
 
   let g:tex_flavor = 'latex'
-  let g:vimtex_view_general_viewer = 'sumatrapdf.exe'
-  let g:vimtex_view_general_options = '@pdf'
+
+  if has("win32")
+      let g:vimtex_view_general_viewer = 'sumatrapdf.exe'
+      let g:vimtex_view_general_options = '@pdf'
+  else
+      let g:vimtex_view_general_viewer = 'zathura'
+      let g:vimtex_view_general_options = '@pdf'
+  endif
   let g:vimtex_quickfix_ignore_filters = [
     \'Overfull',
+    \'Underfull',
     \]
   let g:vimtex_matchparen_enabled = 0
 
@@ -123,6 +131,7 @@ else
 endif
 
 nnoremap <leader>v :e $MYVIMRC<CR>
+nnoremap <leader>l :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<CR>
 nnoremap <silent><leader>go :Goyo<CR>
 nnoremap <silent><leader>x :nohl<CR>
@@ -132,8 +141,7 @@ nnoremap <leader>h :%s/
 nnoremap <leader>o o<ESC>
 nnoremap <leader>O O<ESC>
 
-nnoremap <leader>j :m .+1<cr>==
-nnoremap <leader>k :m .-2<cr>==
+nnoremap <leader>T :set shiftwidth 
 
 " --------------------------------------------------------------------------
 
@@ -163,35 +171,15 @@ set expandtab
 
 set splitbelow
 set splitright
-" Mouse
+
+" allow mouse control
 set mouse=a
 
-let g:bg_clear = 1
-
-" Transparent vim background
-function! ToggleClear()
-    if g:bg_clear
-        let g:bg_clear = 0
-        hi! EndOfBuffer ctermbg=16 ctermfg=16 guibg=#282c34 guifg=#282c34
-        hi Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#282c34
-        " hi LineNr ctermfg=59 guifg=#4b5263
-        "hi cursorLineNr ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#2c323c
-    else
-        let g:bg_clear = 1
-        hi Normal guibg=NONE ctermbg=NONE
-        hi! EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=NONE guifg=#282c34
-        " hi clear cursorLineNR
-        " hi clear LineNr
-    endif
-endfunction
-
-call ToggleClear()
-
-" tab control
+" buffer control
 nnoremap th :bp<CR>
 nnoremap tl :bn<CR>
 
-" Pane control
+" pane control
 nnoremap zh <C-w>h
 nnoremap zj <C-w>j
 nnoremap zk <C-w>k
@@ -203,6 +191,10 @@ noremap k gk
 " auto-completion selection
 inoremap <C-j> <C-n>
 inoremap <C-k> <C-p>
+
+" move line up/down
+nnoremap <C-j> :m .+1<cr>==
+nnoremap <C-k> :m .-2<cr>==
 
 " wrap movement across lines
 set whichwrap+=>,l
