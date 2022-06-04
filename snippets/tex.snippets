@@ -1,0 +1,28 @@
+snippet tex Basic latex template for assignments
+	\documentclass[11pt]{article}
+	\evensidemargin 6mm
+	\oddsidemargin 6mm
+	\topmargin -1.1cm
+
+	\usepackage{amsfonts,amsmath,amssymb,enumerate,mathtools, multicol}
+	\usepackage[margin=0.7in]{geometry}
+
+	\newcommand{\R}{\mathbb R}
+	\newcommand{\N}{\mathbb R}
+	\newcommand{\Z}{\mathbb Z}
+	\newcommand{\C}{\mathbb C}
+
+	\begin{document}
+	\parindent=0pt
+	\setlength{\parskip}{1.5ex}
+
+	\textbf{${1} Spring 2022: Assignment ${2} \\\Derek Zhang (20890999)\\\ ${3}, 2022}
+
+	${0}
+
+	\end{document}
+
+snippet enumerate
+	\begin{enumerate}[(a)]
+		${0}
+	\end{enumerate}

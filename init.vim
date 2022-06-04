@@ -10,11 +10,13 @@ if !exists('g:vscode')
   Plug 'arcticicestudio/nord-vim'
   Plug 'ryanoasis/vim-devicons'
   Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'drewtempelmeyer/palenight.vim'
+  Plug 'sainnhe/everforest'
 
   " Utility
   "   Vimscript
   "Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'jiangmiao/auto-pairs'
+  "Plug 'jiangmiao/auto-pairs'
   Plug 'junegunn/goyo.vim'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
   Plug 'junegunn/fzf.vim'
@@ -22,7 +24,8 @@ if !exists('g:vscode')
   Plug 'dstein64/vim-startuptime'
   Plug 'voldikss/vim-floaterm'
   Plug 'tpope/vim-surround'
-  
+  Plug 'Raimondi/delimitMate'
+
   "   Lua
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'kyazdani42/nvim-tree.lua'
@@ -45,6 +48,7 @@ if !exists('g:vscode')
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'lervag/vimtex'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+  Plug 'onsails/lspkind.nvim'
   call plug#end()
 endif
 
@@ -73,10 +77,8 @@ if !exists('g:vscode')
     \]
   let g:vimtex_matchparen_enabled = 0
 
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsJumpForwardTrigger="<tab>"
-
-  let g:UltiSnipsEditSplit="vertical"
+  let g:delimitMate_expand_cr = 1
+  let g:delimitMate_expand_space = 1
 
   "if has("win32")
   "  source ~/AppData/Local/nvim/config/coc.vim
@@ -87,7 +89,9 @@ if !exists('g:vscode')
   let g:floaterm_autoclose=1
   let g:floaterm_title=""
   let g:floaterm_wintype = 'normal'
-  let g:floaterm_shell = 'powershell.exe -NoLogo'
+  if has("win32")
+    let g:floaterm_shell = 'powershell.exe -NoLogo'
+  endif
   tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
 lua << EOF
@@ -96,7 +100,12 @@ lua << EOF
           offsets = {{filetype = "NvimTree", text_align = "left"}},
       }
   }
-  require("lualine").setup{}
+  require("lualine").setup {
+      options = {
+          component_separators = { left = '', right = '/'},
+          section_separators = { left = '', right = ''},
+      }
+  }
   require("nvim-tree").setup{}
   require("nvim-treesitter.configs").setup {
     ensure_installed = { "javascript", "typescript", "python" },
@@ -106,9 +115,13 @@ lua << EOF
       additional_vim_regex_highlighting = false,
     },
   }
+  require("luasnip.loaders.from_snipmate").lazy_load()
+
   require("user.cmp")
   require("user.lsp")
 EOF
+"{ left = '', right = ''
+"{ left = '', right = ''}
 endif
 
 " ---------------------------------------------------------------------------
@@ -155,22 +168,29 @@ syntax on
 if !exists('g:vscode')
   let g:nord_underline = 0
   let g:nord_italic = v:false
-  colorscheme nord
+  colorscheme everforest
+  highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+  highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+  highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+  highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+  highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+  highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
 endif
-"set background=dark
-"let g:airline_theme='base16_spacemacs'
 
+" Sets
 set noswapfile
 set incsearch
 set inccommand=nosplit
 set scrolloff=1
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 set splitbelow
 set splitright
+
+set signcolumn=yes
 
 " allow mouse control
 set mouse=a
@@ -205,6 +225,9 @@ noremap 0 ^
 noremap q %
 noremap Q q
 nnoremap Y y$
+vnoremap <Tab> >gv
+vnoremap > >gv
+vnoremap < <gv
 
 " Search
 set nohlsearch nowrapscan
