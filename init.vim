@@ -127,7 +127,9 @@ lua << EOF
           section_separators = { left = '', right = ''},
       }
   }
-  require("nvim-tree").setup{}
+  require("nvim-tree").setup{
+      view = {width = 40},
+  }
   require("nvim-treesitter.configs").setup {
     ensure_installed = { "javascript", "typescript", "python" },
     sync_install = false,
@@ -156,7 +158,7 @@ else
   nnoremap <leader>w :w<CR>
   nnoremap <silent><leader>t :FloatermToggle<CR>
   nnoremap <silent><leader><Tab> :BufferLinePick<CR>
-  nnoremap <leader>q :bd<CR>
+  nnoremap <leader>q :bd<CR>:bp<CR>
   nnoremap <silent><leader>f <cmd>Telescope git_files<cr>
   nnoremap <silent><C-p> <cmd>Telescope git_files<cr>
   nnoremap <silent><leader>e :NvimTreeToggle<CR>
