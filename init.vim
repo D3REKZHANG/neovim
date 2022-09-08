@@ -50,9 +50,9 @@ if !exists('g:vscode')
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
   Plug 'onsails/lspkind.nvim'
   Plug 'glepnir/dashboard-nvim'
+  Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
   call plug#end()
 endif
-
 
 " Plugins Config
 if !exists('g:vscode')
@@ -81,12 +81,6 @@ if !exists('g:vscode')
   let g:delimitMate_expand_cr = 1
   let g:delimitMate_expand_space = 1
 
-  "if has("win32")
-  "  source ~/AppData/Local/nvim/config/coc.vim
-  "else
-  "  source ~/.config/nvim/config/coc.vim
-  "endif
-
   let g:floaterm_autoclose=1
   let g:floaterm_title=""
   let g:floaterm_wintype = 'normal'
@@ -97,24 +91,6 @@ if !exists('g:vscode')
 
   let g:dashboard_default_executive = 'telescope'
 
-  let g:dashboard_custom_header = [
-    \'',
-    \'⣿⣿⣿⣿⣯⣿⣿⠄⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠈⣿⣿⣿⣿⣿⣿⣆⠄',
-    \'⢻⣿⣿⣿⣾⣿⢿⣢⣞⣿⣿⣿⣿⣷⣶⣿⣯⣟⣿⢿⡇⢃⢻⣿⣿⣿⣿⣿⢿⡄',
-    \'⠄⢿⣿⣯⣏⣿⣿⣿⡟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣧⣾⢿⣮⣿⣿⣿⣿⣾⣷',
-    \'⠄⣈⣽⢾⣿⣿⣿⣟⣄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣝⣯⢿⣿⣿⣿⣿',
-    \'⣿⠟⣫⢸⣿⢿⣿⣾⣿⢿⣿⣿⢻⣿⣿⣿⢿⣿⣿⣿⢸⣿⣼⣿⣿⣿⣿⣿⣿⣿',
-    \'⡟⢸⣟⢸⣿⠸⣷⣝⢻⠘⣿⣿⢸⢿⣿⣿⠄⣿⣿⣿⡆⢿⣿⣼⣿⣿⣿⣿⢹⣿',
-    \'⡇⣿⡿⣿⣿⢟⠛⠛⠿⡢⢻⣿⣾⣞⣿⡏⠖⢸⣿⢣⣷⡸⣇⣿⣿⣿⢼⡿⣿⣿',
-    \'⣡⢿⡷⣿⣿⣾⣿⣷⣶⣮⣄⣿⣏⣸⣻⣃⠭⠄⠛⠙⠛⠳⠋⣿⣿⣇⠙⣿⢸⣿',
-    \'⠫⣿⣧⣿⣿⣿⣿⣿⣿⣿⣿⣿⠻⣿⣾⣿⣿⣿⣿⣿⣿⣿⣷⣿⣿⣹⢷⣿⡼⠋',
-    \' ⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣿⣿⣿  ',
-    \'  ⢻⢹⣿⠸⣿⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣼⣿⣿⣿⣿⡟  ',
-    \'  ⠈⢸⣿ ⠙⢿⣿⣿⣹⣿⣿⣿⣿⣟⡃⣽⣿⣿⡟⠁⣿⣿⢻⣿⣿⢿  ',
-    \'   ⠘⣿⡄  ⠙⢿⣿⣿⣾⣿⣷⣿⣿⣿⠟⠁  ⣿⣿⣾⣿⡟⣿  ',
-    \'    ⢻⡇⠸⣆  ⠈⠻⣿⡿⠿⠛⠉    ⢸⣿⣇⣿⣿⢿⣿  ',
-    \'',
-    \]
 lua << EOF
   require("bufferline").setup{
       options = {
@@ -125,6 +101,7 @@ lua << EOF
       options = {
           component_separators = { left = '', right = '/'},
           section_separators = { left = '', right = ''},
+          globalstatus = true,
       }
   }
   require("nvim-tree").setup{
@@ -142,6 +119,7 @@ lua << EOF
 
   require("user.cmp")
   require("user.lsp")
+  require("user.dashboard")
 EOF
 "{ left = '', right = ''
 "{ left = '', right = ''}
@@ -167,10 +145,8 @@ else
 endif
 
 nnoremap <leader>v :e $MYVIMRC<CR>
-nnoremap <leader>l :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<CR>
 nnoremap <silent><leader>go :Goyo<CR>
-nnoremap <silent><leader>x :nohl<CR>
 nnoremap <leader>p "*p
 nnoremap <leader>y "+y
 nnoremap <leader>h :%s/
