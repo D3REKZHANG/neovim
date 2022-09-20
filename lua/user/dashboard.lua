@@ -1,6 +1,43 @@
 local db = require('dashboard')
  
-db.custom_header = {
+db.custom_center = {
+  {
+    icon = '  ',
+    desc = 'New File            ',
+    action ='DashboardNewFile',
+    shortcut='SPC  n'
+  },
+  {
+    icon = '  ',
+    desc = 'Open File           ',
+    action =  'Telescope find_files',
+    shortcut='CTRL P'
+  },
+  {
+    icon = '  ',
+    desc = 'Open Config         ',
+    action = 'e $MYVIMRC',
+    shortcut = 'SPC  v',
+  },
+  {
+    icon = '  ',
+    desc = 'Update Plugins            ',
+    action = 'PlugUpdate',
+  },
+  {
+    icon = '  ',
+    desc = 'Edit Colorscheme    ',
+    action = 'Telescope colorscheme',
+    shortcut = 'SPC  9',
+  },
+}
+
+db.custom_footer = {
+  '',
+  '  It\'s a feature, not a bug',
+}
+
+db.custom_header2 = {
     '',
     '   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆         ',
     '    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
@@ -16,14 +53,38 @@ db.custom_header = {
     ''
 }
 
-db.custom_center = {
-  {icon = '  ',
-  desc = 'New File      ',
-  action ='DashboardNewFile'},
-  {icon = '  ',
-  desc = 'Update Plugins',
-  action =  'PlugUpdate'},
-  {icon = '  ',
-  desc = 'Open Config   ',
-  action = 'e asdf.txt'},
+db.custom_header = {
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗',
+  '████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║',
+  '██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║',
+  '██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║',
+  '██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║',
+  '╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝',
+  '',
+  '',
+}
+
+db.custom_header3 = {
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '███████╗ ██████╗ ██╗      █████╗ ██████╗     ██╗   ██╗██╗███╗   ███╗',
+  '██╔════╝██╔═══██╗██║     ██╔══██╗██╔══██╗    ██║   ██║██║████╗ ████║',
+  '███████╗██║   ██║██║     ███████║██████╔╝    ██║   ██║██║██╔████╔██║',
+  '╚════██║██║   ██║██║     ██╔══██║██╔══██╗    ╚██╗ ██╔╝██║██║╚██╔╝██║',
+  '███████║╚██████╔╝███████╗██║  ██║██║  ██║     ╚████╔╝ ██║██║ ╚═╝ ██║',
+  '╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝      ╚═══╝  ╚═╝╚═╝     ╚═╝',
+  '',
+  '',
 }
