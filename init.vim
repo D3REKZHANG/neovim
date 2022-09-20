@@ -52,6 +52,7 @@ if !exists('g:vscode')
   Plug 'folke/trouble.nvim'
   Plug 'akinsho/git-conflict.nvim', { 'tag' : '*' }
   Plug 'f-person/git-blame.nvim'
+  Plug 'sindrets/diffview.nvim'
   call plug#end()
 endif
 
@@ -99,11 +100,16 @@ if !exists('g:vscode')
   let g:conflict_marker_begin = '^<<<<<<< .*$'
   let g:conflict_marker_end   = '^>>>>>>> .*$'
 
+  let g:gitblame_enabled = 0
+
   " Colour scheme
   syntax on
   let g:nord_underline = 0
   let g:nord_italic = v:false
+  let g:everforest_disable_italic_comment = 1
+  let g:everforest_background = "hard"
   colorscheme everforest
+
   highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
   highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
   highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
@@ -132,7 +138,7 @@ lua << EOF
           show_buffer_close_icons = false,
       },
     highlights = {
-      offset_separator = {
+      separator = {
         bg = '#'..string.format("%06x", vim.api.nvim_get_hl_by_name("Normal", true).background),
       }
     }
