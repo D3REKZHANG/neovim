@@ -11,6 +11,8 @@ if !exists('g:vscode')
   Plug 'AhmedAbdulrahman/vim-aylin'
   Plug 'drewtempelmeyer/palenight.vim'
   Plug 'sainnhe/everforest'
+  Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+  Plug 'EdenEast/nightfox.nvim'
 
   " Utility
   "   Vimscript
@@ -108,7 +110,7 @@ if !exists('g:vscode')
   let g:nord_italic = v:false
   let g:everforest_disable_italic_comment = 1
   let g:everforest_background = "hard"
-  colorscheme everforest
+  colorscheme nordfox
 
   highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
   highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
