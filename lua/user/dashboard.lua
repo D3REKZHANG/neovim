@@ -34,7 +34,7 @@ db.custom_center = {
 
 db.custom_footer = {
   '',
-  '  It\'s a feature, not a bug',
+  '  Neovim > VSCode',
 }
 
 db.custom_header2 = {

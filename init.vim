@@ -4,13 +4,14 @@ if !exists('g:vscode')
  
   Plug 'lewis6991/impatient.nvim'
 
-  " Colourthemes
+  " Colourschemes
   Plug 'joshdick/onedark.vim'
   Plug 'mangeshrex/everblush.vim'
   Plug 'arcticicestudio/nord-vim'
   Plug 'AhmedAbdulrahman/vim-aylin'
   Plug 'drewtempelmeyer/palenight.vim'
   Plug 'sainnhe/everforest'
+  Plug 'EdenEast/nightfox.nvim'
 
   " Utility
   "   Vimscript
@@ -33,9 +34,9 @@ if !exists('g:vscode')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
-  Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
   Plug 'williamboman/nvim-lsp-installer'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
@@ -53,6 +54,7 @@ if !exists('g:vscode')
   Plug 'akinsho/git-conflict.nvim', { 'tag' : '*' }
   Plug 'f-person/git-blame.nvim'
   Plug 'sindrets/diffview.nvim'
+  Plug 'folke/zen-mode.nvim'
   call plug#end()
 endif
 
@@ -95,7 +97,6 @@ if !exists('g:vscode')
 
   let g:smoothie_no_default_mappings = 1
 
-
   " Include text after begin and end markers
   let g:conflict_marker_begin = '^<<<<<<< .*$'
   let g:conflict_marker_end   = '^>>>>>>> .*$'
@@ -108,7 +109,7 @@ if !exists('g:vscode')
   let g:nord_italic = v:false
   let g:everforest_disable_italic_comment = 1
   let g:everforest_background = "hard"
-  colorscheme everforest
+  colorscheme nordfox
 
   highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
   highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
@@ -138,7 +139,7 @@ lua << EOF
           show_buffer_close_icons = false,
       },
     highlights = {
-      separator = {
+      offset_separator = {
         bg = '#'..string.format("%06x", vim.api.nvim_get_hl_by_name("Normal", true).background),
       }
     }
@@ -204,6 +205,10 @@ lua << EOF
   require("nvim-treesitter.configs").setup {
     ensure_installed = { "javascript", "typescript", "python" },
     sync_install = false,
+    indent = {
+      enable = true,
+      disable = { 'python', 'c'} -- these and some other langs don't work well
+    },
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
@@ -235,7 +240,15 @@ lua << EOF
         path_display = {"tail"},
       }
     },
+    extensions = {
+      ["ui-select"] = {
+        require("telescope.themes").get_dropdown {
+          -- even more opts
+        }
+      }
+    }
   } 
+  require("telescope").load_extension("ui-select")
 
   require("trouble").setup{}
   require('git-conflict').setup{}
@@ -253,24 +266,25 @@ endif
 let mapleader = " "
 
 if exists('g:vscode')
-  nnoremap <leader>w <CMD>call VSCodeCall('workbench.action.files.save')<CR>
+  nnoremap <leader>w :call VSCodeCall('workbench.action.files.save')<CR>
 else
   nnoremap <leader>w :w<CR>
-  nnoremap <silent><leader>t <cmd>FloatermToggle<CR>
-  nnoremap <silent><leader><Tab> <cmd>BufferLinePick<CR>
-  nnoremap <silent><leader>q <cmd>Bdelete<CR>
-  nnoremap <silent><C-p> <cmd>Telescope find_files<CR>
-  nnoremap <silent><C-l> <cmd>Telescope live_grep<CR>
-  nnoremap <silent><leader>9 <cmd>Telescope colorscheme<CR>
-  nnoremap <silent><leader>b <cmd>Telescope buffers<CR>
-  nnoremap <silent><leader>e <cmd>NvimTreeToggle<CR>
+  nnoremap <silent><leader>t :FloatermToggle<CR>
+  nnoremap <silent><leader><Tab> :BufferLinePick<CR>
+  nnoremap <silent><leader>q :Bdelete<CR>
+  nnoremap <silent><C-p> :Telescope find_files<CR>
+  nnoremap <silent><C-l> :Telescope live_grep<CR>
+  nnoremap <silent><leader>b :Telescope buffers<CR>
+  nnoremap <silent><leader>e :NvimTreeToggle<CR>
   nnoremap <silent><leader>z <C-^>
-  nnoremap <silent><leader>8 <cmd>IndentBlanklineToggle<CR>
+
+  nnoremap <silent><leader>5 :ZenMode<CR>
+  nnoremap <silent><leader>8 :IndentBlanklineToggle<CR>
+  nnoremap <silent><leader>9 :Telescope colorscheme<CR>
 endif
 
 nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<CR>
-nnoremap <silent><leader>go :Goyo<CR>
 nnoremap <leader>p "0p
 nnoremap <leader>y "+y
 nnoremap <leader>h :%s/
@@ -351,7 +365,7 @@ vnoremap < <gv
 
 " Search
 set nohlsearch nowrapscan
-nnoremap <silent> <C-/> :set hlsearch!<cr>:set wrapscan!<cr>
+nnoremap <silent><C-_> :set hlsearch!<cr>:set wrapscan!<cr>
 
 if exists('g:loaded_webdevicons')
     call webdevicons#refresh()
