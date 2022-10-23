@@ -22,9 +22,15 @@ if !exists('g:vscode')
   Plug 'tpope/vim-surround'
   Plug 'Raimondi/delimitMate'
   Plug 'lervag/vimtex'
+  Plug 'turbio/bracey.vim'
 
   Plug 'ryanoasis/vim-devicons'
   Plug 'kyazdani42/nvim-web-devicons'
+
+  " Database
+  Plug 'tpope/vim-dadbod'
+  Plug 'kristijanhusak/vim-dadbod-completion'
+  Plug 'kristijanhusak/vim-dadbod-ui'
 
   "   Lua
   Plug 'nvim-lualine/lualine.nvim'
@@ -55,6 +61,10 @@ if !exists('g:vscode')
   Plug 'f-person/git-blame.nvim'
   Plug 'sindrets/diffview.nvim'
   Plug 'folke/zen-mode.nvim'
+  Plug 'numToStr/Comment.nvim'
+  Plug 'lewis6991/gitsigns.nvim'
+  Plug 'ray-x/lsp_signature.nvim'
+
   call plug#end()
 endif
 
@@ -147,18 +157,36 @@ lua << EOF
 
   require("lualine").setup {
       options = {
-          component_separators = { left = '', right = '/'},
-          section_separators = { left = '', right = ''},
+          -- component_separators = { left = '', right = '/'},
+          section_separators = '',
+          -- component_separators = { left = '', right = ''},
+          -- section_separators = { left = '', right = ''},
+          component_separators = '',
+          -- section_separators = { left = '', right = '' },
+
           globalstatus = true,
       },
       sections = {
-      lualine_c = {
-        {
-          'filename',
-          file_status = true, -- displays file status (readonly status, modified status)
-          path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
-        }
-      }
+        lualine_a = {
+          {
+            'mode',
+            separator = { left = '', right = '' },
+            fmt = function(str) return ' ' end,
+            padding = { left = 0, right = 0 },
+          },
+        },
+        lualine_b = { 'branch', 'diff' },
+        lualine_c = {
+          'diagnostics',
+          {
+            'filename',
+            file_status = true, -- displays file status (readonly status, modified status)
+            path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+          },
+        },
+        lualine_x = { 'filetype' },
+        lualine_y = { 'location'},
+        lualine_z = { },
     }
   }
 
@@ -248,7 +276,11 @@ lua << EOF
       }
     }
   } 
+
   require("telescope").load_extension("ui-select")
+  require("Comment").setup{}
+  require('gitsigns').setup()
+  require('lsp_signature').setup()
 
   require("trouble").setup{}
   require('git-conflict').setup{}
@@ -259,6 +291,8 @@ EOF
 "{ left = '', right = ''
 "{ left = '', right = ''}
 endif
+
+hi NormalFloat guibg=synIDattr(synIDtrans(hlID("Normal")), "bg#")
 
 " ---------------------------------------------------------------------------
 
@@ -281,6 +315,9 @@ else
   nnoremap <silent><leader>5 :ZenMode<CR>
   nnoremap <silent><leader>8 :IndentBlanklineToggle<CR>
   nnoremap <silent><leader>9 :Telescope colorscheme<CR>
+  nnoremap <silent><leader>7 :Gitsigns toggle_signs<CR>
+  nnoremap <silent><leader>6 :GitBlameToggle<CR>
+  nnoremap <silent><leader>db :DBUIToggle<CR>
 endif
 
 nnoremap <leader>v :e $MYVIMRC<CR>
@@ -295,7 +332,6 @@ nnoremap <leader>T :set shiftwidth
 " g Mapping ----------------------------------------------------------------
 
 nnoremap <silent>gc :call SetColorCol()<CR>
-nnoremap <silent>gb :GitBlameToggle<CR>
 nnoremap <silent>gp "*p
 
 " --------------------------------------------------------------------------

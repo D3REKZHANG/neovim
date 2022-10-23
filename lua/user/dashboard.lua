@@ -37,7 +37,7 @@ db.custom_footer = {
   '  Neovim > VSCode',
 }
 
-db.custom_header2 = {
+db.custom_header = {
     '',
     '   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆         ',
     '    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
@@ -53,7 +53,7 @@ db.custom_header2 = {
     ''
 }
 
-db.custom_header = {
+db.custom_header2 = {
   '',
   '',
   '',

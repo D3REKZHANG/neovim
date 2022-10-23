@@ -20,12 +20,12 @@ local config = {
     underline = true,
     severity_sort = true,
     float = {
-        focusable = true,
+        focusable = false,
         --style = "minimal",
         --border = "none",
     },
     peek = {
-        max_height = 15,
+        max_height = 25,
         max_width = 30,
         context = 10,
     },
@@ -46,7 +46,7 @@ if not status_ok then
     return
 end
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local opts = { noremap=true, silent=true }
 -- Use an on_attach function to only map the following keys
