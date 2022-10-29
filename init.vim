@@ -27,6 +27,8 @@ if !exists('g:vscode')
   Plug 'ryanoasis/vim-devicons'
   Plug 'kyazdani42/nvim-web-devicons'
 
+  Plug 'tpope/vim-fugitive'
+
   " Database
   Plug 'tpope/vim-dadbod'
   Plug 'kristijanhusak/vim-dadbod-completion'
@@ -64,6 +66,8 @@ if !exists('g:vscode')
   Plug 'numToStr/Comment.nvim'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'ray-x/lsp_signature.nvim'
+  Plug 'fgheng/winbar.nvim'
+  Plug 'SmiteshP/nvim-navic'
 
   call plug#end()
 endif
@@ -135,10 +139,10 @@ lua << EOF
       options = {
           offsets = {
             {
-                filetype = "NvimTree",
-                text="File Explorer",
-                separator= true,
-                text_align = "left"
+              filetype = "NvimTree",
+              text="File Explorer",
+              text_align = "left",
+              separator = false,
             }
           },
 
@@ -148,11 +152,12 @@ lua << EOF
           show_close_icon = false,
           show_buffer_close_icons = false,
       },
-    highlights = {
-      offset_separator = {
-        bg = '#'..string.format("%06x", vim.api.nvim_get_hl_by_name("Normal", true).background),
-      }
-    }
+    -- highlights = {
+    --   offset_separator = {
+    --     bg = '#'..string.format("%06x", vim.api.nvim_get_hl_by_name("Normal", true).background),
+    --   }
+    -- }
+    
   }
 
   require("lualine").setup {
@@ -281,6 +286,41 @@ lua << EOF
   require("Comment").setup{}
   require('gitsigns').setup()
   require('lsp_signature').setup()
+  require('winbar').setup({
+    enabled = true,
+
+    show_file_path = true,
+    show_symbols = true,
+
+    colors = {
+        path = '', -- You can customize colors like #c946fd
+        file_name = '',
+        symbols = '',
+    },
+
+    icons = {
+        file_icon_default = '',
+        seperator = '>',
+        editor_state = '●',
+        lock_icon = '',
+    },
+
+    exclude_filetype = {
+        'help',
+        'startify',
+        'dashboard',
+        'packer',
+        'neogitstatus',
+        'NvimTree',
+        'Trouble',
+        'alpha',
+        'lir',
+        'Outline',
+        'spectre_panel',
+        'toggleterm',
+        'qf',
+    }
+  })
 
   require("trouble").setup{}
   require('git-conflict').setup{}
@@ -293,6 +333,7 @@ EOF
 endif
 
 hi NormalFloat guibg=synIDattr(synIDtrans(hlID("Normal")), "bg#")
+hi NvimTreeWinSeparator guifg=#000000
 
 " ---------------------------------------------------------------------------
 
@@ -318,6 +359,10 @@ else
   nnoremap <silent><leader>7 :Gitsigns toggle_signs<CR>
   nnoremap <silent><leader>6 :GitBlameToggle<CR>
   nnoremap <silent><leader>db :DBUIToggle<CR>
+
+  nnoremap <leader>cc :GitConflictChoose
+  nnoremap <leader>cn :GitConflictNextConflict<CR>
+  nnoremap <leader>cN :GitConflictPrevConflict<CR>
 endif
 
 nnoremap <leader>v :e $MYVIMRC<CR>

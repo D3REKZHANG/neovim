@@ -31,6 +31,15 @@ local config = {
     },
 }
 
+local function attach_navic(client, bufnr)
+  vim.g.navic_silence = true
+  local status_ok, navic = pcall(require, "nvim-navic")
+  if not status_ok then
+    return
+  end
+  navic.attach(client, bufnr)
+end
+
 vim.diagnostic.config(config)
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -52,6 +61,7 @@ local opts = { noremap=true, silent=true }
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  attach_navic(client, bufnr);
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
