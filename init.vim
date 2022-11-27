@@ -12,6 +12,8 @@ if !exists('g:vscode')
   Plug 'drewtempelmeyer/palenight.vim'
   Plug 'sainnhe/everforest'
   Plug 'EdenEast/nightfox.nvim'
+  Plug 'rmehri01/onenord.nvim', { 'branch': 'main' }
+  Plug 'NLKNguyen/papercolor-theme'
 
   " Utility
   "   Vimscript
@@ -68,6 +70,9 @@ if !exists('g:vscode')
   Plug 'ray-x/lsp_signature.nvim'
   Plug 'fgheng/winbar.nvim'
   Plug 'SmiteshP/nvim-navic'
+  Plug 'smjonas/inc-rename.nvim'
+  Plug 'jose-elias-alvarez/typescript.nvim'
+  Plug 'stevearc/aerial.nvim'
 
   call plug#end()
 endif
@@ -123,7 +128,7 @@ if !exists('g:vscode')
   let g:nord_italic = v:false
   let g:everforest_disable_italic_comment = 1
   let g:everforest_background = "hard"
-  colorscheme nordfox
+  colorscheme onenord
 
   highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
   highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
@@ -135,205 +140,29 @@ if !exists('g:vscode')
   hi NvimTreeRootFolder guifg=FG 
 
 lua << EOF
-  require("bufferline").setup{
-      options = {
-          offsets = {
-            {
-              filetype = "NvimTree",
-              text="File Explorer",
-              text_align = "left",
-              separator = false,
-            }
-          },
-
-          diagnostics = "nvim_lsp",
-          separator_style = {"", ""},
-          modified_icon = '●',
-          show_close_icon = false,
-          show_buffer_close_icons = false,
-      },
-    -- highlights = {
-    --   offset_separator = {
-    --     bg = '#'..string.format("%06x", vim.api.nvim_get_hl_by_name("Normal", true).background),
-    --   }
-    -- }
-    
-  }
-
-  require("lualine").setup {
-      options = {
-          -- component_separators = { left = '', right = '/'},
-          section_separators = '',
-          -- component_separators = { left = '', right = ''},
-          -- section_separators = { left = '', right = ''},
-          component_separators = '',
-          -- section_separators = { left = '', right = '' },
-
-          globalstatus = true,
-      },
-      sections = {
-        lualine_a = {
-          {
-            'mode',
-            separator = { left = '', right = '' },
-            fmt = function(str) return ' ' end,
-            padding = { left = 0, right = 0 },
-          },
-        },
-        lualine_b = { 'branch', 'diff' },
-        lualine_c = {
-          'diagnostics',
-          {
-            'filename',
-            file_status = true, -- displays file status (readonly status, modified status)
-            path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
-          },
-        },
-        lualine_x = { 'filetype' },
-        lualine_y = { 'location'},
-        lualine_z = { },
-    }
-  }
-
-  require("nvim-tree").setup{
-      view = {width = "20%"},
-      update_focused_file = { enable = true },
-      renderer = {
-        icons = {
-          show = {
-            folder = true,
-            folder_arrow = true,
-          },
-          glyphs = {
-            folder = {
-              default ="",
-              open = "ﱮ",
-            },
-            git = {
-              unstaged = "",
-              staged = "",
-              unmerged = "",
-              renamed = "➜",
-              untracked = "★",
-              deleted = "",
-              ignored = "◌",
-            },
-          }
-        },
-      },
-      diagnostics = {
-        enable = true,
-        show_on_dirs = true,
-        debounce_delay = 50,
-        icons = {
-          hint = "",
-          info = "",
-          warning = "",
-          error = "",
-        },
-      },
-
-  }
-
-  require("nvim-treesitter.configs").setup {
-    ensure_installed = { "javascript", "typescript", "python" },
-    sync_install = false,
-    indent = {
-      enable = true,
-      disable = { 'python', 'c'} -- these and some other langs don't work well
-    },
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = false,
-    },
-  }
-
   require("luasnip.loaders.from_snipmate").lazy_load()
-
-  local theme = require("telescope.themes")
-  require("telescope").setup {
-    defaults = {
-      path_display = {"truncate"},
-    },
-    pickers = {
-      find_files = {
-        -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-        find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
-        theme="dropdown",
-        previewer = false,
-      },
-      colorscheme = {
-        --enable_preview = true,
-        previewer = false,
-        theme="dropdown"
-      },
-      buffers = {
-        theme = "dropdown",
-        previewer = false,
-        path_display = {"tail"},
-      }
-    },
-    extensions = {
-      ["ui-select"] = {
-        require("telescope.themes").get_dropdown {
-          -- even more opts
-        }
-      }
-    }
-  } 
-
-  require("telescope").load_extension("ui-select")
   require("Comment").setup{}
   require('gitsigns').setup()
   require('lsp_signature').setup()
-  require('winbar').setup({
-    enabled = true,
-
-    show_file_path = true,
-    show_symbols = true,
-
-    colors = {
-        path = '', -- You can customize colors like #c946fd
-        file_name = '',
-        symbols = '',
-    },
-
-    icons = {
-        file_icon_default = '',
-        seperator = '>',
-        editor_state = '●',
-        lock_icon = '',
-    },
-
-    exclude_filetype = {
-        'help',
-        'startify',
-        'dashboard',
-        'packer',
-        'neogitstatus',
-        'NvimTree',
-        'Trouble',
-        'alpha',
-        'lir',
-        'Outline',
-        'spectre_panel',
-        'toggleterm',
-        'qf',
-    }
-  })
-
   require("trouble").setup{}
   require('git-conflict').setup{}
+  require('inc_rename').setup{}
+  require('typescript').setup{}
+
   require("user.cmp")
   require("user.lsp")
   require("user.dashboard")
+  require("user.telescope")
+  require("user.nvim-tree")
+  require("user.others")
 EOF
 "{ left = '', right = ''
 "{ left = '', right = ''}
 endif
 
 hi NormalFloat guibg=synIDattr(synIDtrans(hlID("Normal")), "bg#")
-hi NvimTreeWinSeparator guifg=#000000
+hi FloatBorder guibg=synIDattr(synIDtrans(hlID("Normal")), "bg#")
+hi NvimTreeWinSeparator guifg=#2e3440 guibg=#2e3440
 
 " ---------------------------------------------------------------------------
 
@@ -353,19 +182,22 @@ else
   nnoremap <silent><leader>e :NvimTreeToggle<CR>
   nnoremap <silent><leader>z <C-^>
 
+  nnoremap <silent><leader>4 :call SetColorCol()<CR>
   nnoremap <silent><leader>5 :ZenMode<CR>
   nnoremap <silent><leader>8 :IndentBlanklineToggle<CR>
   nnoremap <silent><leader>9 :Telescope colorscheme<CR>
   nnoremap <silent><leader>7 :Gitsigns toggle_signs<CR>
   nnoremap <silent><leader>6 :GitBlameToggle<CR>
   nnoremap <silent><leader>db :DBUIToggle<CR>
+  nnoremap <silent><leader>a :AerialToggle!<CR>
+  nnoremap <leader>r :IncRename<space>
 
   nnoremap <leader>cc :GitConflictChoose
   nnoremap <leader>cn :GitConflictNextConflict<CR>
   nnoremap <leader>cN :GitConflictPrevConflict<CR>
 endif
 
-nnoremap <leader>v :e $MYVIMRC<CR>
+nnoremap <leader>v :lua require('telescope.builtin').find_files({cwd='~/.config/nvim/'})<CR>
 nnoremap <leader>so :source $MYVIMRC<CR>
 nnoremap <leader>p "0p
 nnoremap <leader>y "+y
@@ -376,7 +208,6 @@ nnoremap <leader>T :set shiftwidth
 
 " g Mapping ----------------------------------------------------------------
 
-nnoremap <silent>gc :call SetColorCol()<CR>
 nnoremap <silent>gp "*p
 
 " --------------------------------------------------------------------------
@@ -409,6 +240,8 @@ nnoremap <C-D> <cmd>call smoothie#do("\<C-D>") <CR>
 vnoremap <C-D> <cmd>call smoothie#do("\<C-D>") <CR>
 nnoremap <C-U> <cmd>call smoothie#do("\<C-U>") <CR>
 vnoremap <C-U> <cmd>call smoothie#do("\<C-U>") <CR>
+nnoremap <C-E> 2<C-E> <CR>
+nnoremap <C-Y> 2<C-Y> <CR>
 
 " buffer control
 nnoremap th :bp<CR>
@@ -440,12 +273,18 @@ noremap 0 ^
 noremap q %
 noremap Q q
 nnoremap Y y$
+
+" Indent
 vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
 vnoremap > >gv
 vnoremap < <gv
 
 " Search
 set nohlsearch nowrapscan
+nnoremap <silent><C-/> :set hlsearch!<cr>:set wrapscan!<cr>
 nnoremap <silent><C-_> :set hlsearch!<cr>:set wrapscan!<cr>
 
 if exists('g:loaded_webdevicons')
