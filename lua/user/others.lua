@@ -1,28 +1,3 @@
-require("bufferline").setup{
-    options = {
-        offsets = {
-          {
-            filetype = "NvimTree",
-            text="File Explorer",
-            text_align = "left",
-            separator = false,
-          }
-        },
-
-        diagnostics = "nvim_lsp",
-        separator_style = {"", ""},
-        modified_icon = '●',
-        show_close_icon = false,
-        show_buffer_close_icons = false,
-    },
-  -- highlights = {
-  --   offset_separator = {
-  --     bg = '#'..string.format("%06x", vim.api.nvim_get_hl_by_name("Normal", true).background),
-  --   }
-  -- }
-  
-}
-
 require("lualine").setup {
     options = {
         -- component_separators = { left = '', right = '/'},
@@ -39,8 +14,8 @@ require("lualine").setup {
         {
           'mode',
           separator = { left = '', right = '' },
-          fmt = function(str) return ' ' end,
-          padding = { left = 0, right = 0 },
+          -- fmt = function(str) return ' ' end,
+          -- padding = { left = 0, right = 0 },
         },
       },
       lualine_b = { 'branch', 'diff' },
@@ -71,11 +46,17 @@ require("nvim-treesitter.configs").setup {
   },
 }
 
-require('aerial').setup({
+  require('aerial').setup({
   -- optionally use on_attach to set keymaps when aerial has attached to a buffer
   on_attach = function(bufnr)
     -- Jump forwards/backwards with '{' and '}'
-    vim.keymap.set('n', '[', '<cmd>AerialPrev<CR>', {buffer = bufnr})
-    vim.keymap.set('n', ']', '<cmd>AerialNext<CR>', {buffer = bufnr})
+    vim.keymap.set('n', '<s-tab>', '<cmd>AerialPrev<CR>', {buffer = bufnr})
+    vim.keymap.set('n', '<tab>', '<cmd>AerialNext<CR>', {buffer = bufnr})
   end
+})
+
+require('fine-cmdline').setup({
+  cmdline = {
+    prompt = ':'
+  },
 })

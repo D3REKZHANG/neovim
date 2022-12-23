@@ -1,5 +1,7 @@
 local theme = require("telescope.themes")
 local telescope = require('telescope')
+local trouble = require('trouble.providers.telescope')
+
 telescope.setup {
   defaults = {
     path_display = {"truncate"},
@@ -7,6 +9,7 @@ telescope.setup {
       i = {
         ["<C-j>"] = "move_selection_next",
         ["<C-k>"] = "move_selection_previous",
+        ["<C-t>"] = trouble.open_with_trouble,
       }
     }
   },
@@ -25,13 +28,33 @@ telescope.setup {
     lsp_references = {
       theme="ivy",
     },
+    live_grep = {
+      -- additional_args = {"-m","1"},
+      disable_coordinates = true,
+      path_display = {"tail"},
+      layout_strategy = "horizontal",
+      layout_config = {
+        height = vim.o.lines, -- maximally available lines
+        width = vim.o.columns, -- maximally available columns
+        -- prompt_position = "top",
+        preview_width = 0.4,
+        preview_height = 0.2,
+        -- mirror=true,
+      },
+    },
     colorscheme = {
       theme="dropdown",
     },
     buffers = {
-      theme = "dropdown",
-      previewer = false,
-      path_display = {"tail"},
+      sorting_strategy = 'ascending',
+      path_display = {"smart"},
+      layout_strategy = "horizontal",
+      layout_config = {
+        height = 0.8,
+        width = 0.8,
+        prompt_position = "top",
+        preview_width = 0.5, -- 60% of available lines
+      },
     }
   },
   extensions = {

@@ -14,6 +14,7 @@ if !exists('g:vscode')
   Plug 'EdenEast/nightfox.nvim'
   Plug 'rmehri01/onenord.nvim', { 'branch': 'main' }
   Plug 'NLKNguyen/papercolor-theme'
+  Plug 'mhartington/oceanic-next'
 
   " Utility
   "   Vimscript
@@ -71,8 +72,12 @@ if !exists('g:vscode')
   Plug 'fgheng/winbar.nvim'
   Plug 'SmiteshP/nvim-navic'
   Plug 'smjonas/inc-rename.nvim'
-  Plug 'jose-elias-alvarez/typescript.nvim'
+  " Plug 'jose-elias-alvarez/typescript.nvim'
   Plug 'stevearc/aerial.nvim'
+  " Plug 'romgrk/barbar.nvim'
+  Plug 'MunifTanjim/nui.nvim'
+  Plug 'VonHeikemen/fine-cmdline.nvim'
+  Plug 'ggandor/leap.nvim'
 
   call plug#end()
 endif
@@ -147,13 +152,14 @@ lua << EOF
   require("trouble").setup{}
   require('git-conflict').setup{}
   require('inc_rename').setup{}
-  require('typescript').setup{}
+  -- require('leap').add_default_mappings{}
 
   require("user.cmp")
   require("user.lsp")
   require("user.dashboard")
   require("user.telescope")
   require("user.nvim-tree")
+  require("user.bufferline")
   require("user.others")
 EOF
 "{ left = '', right = ''
@@ -182,12 +188,14 @@ else
   nnoremap <silent><leader>e :NvimTreeToggle<CR>
   nnoremap <silent><leader>z <C-^>
 
-  nnoremap <silent><leader>4 :call SetColorCol()<CR>
-  nnoremap <silent><leader>5 :ZenMode<CR>
-  nnoremap <silent><leader>8 :IndentBlanklineToggle<CR>
+  nnoremap <silent><leader>2 :ZenMode<CR>
+  nnoremap <silent><leader>3 :DiffviewOpen<CR>
+  nnoremap <silent><leader>4 :GitBlameToggle<CR>
+  nnoremap <silent><leader>5 :set relativenumber!<CR>
+  nnoremap <silent><leader>6 :call SetColorCol()<CR>
+  nnoremap <silent><leader>7 :IndentBlanklineToggle<CR>
+  nnoremap <silent><leader>8 :Gitsigns toggle_signs<CR>
   nnoremap <silent><leader>9 :Telescope colorscheme<CR>
-  nnoremap <silent><leader>7 :Gitsigns toggle_signs<CR>
-  nnoremap <silent><leader>6 :GitBlameToggle<CR>
   nnoremap <silent><leader>db :DBUIToggle<CR>
   nnoremap <silent><leader>a :AerialToggle!<CR>
   nnoremap <leader>r :IncRename<space>
@@ -200,7 +208,9 @@ endif
 nnoremap <leader>v :lua require('telescope.builtin').find_files({cwd='~/.config/nvim/'})<CR>
 nnoremap <leader>so :source $MYVIMRC<CR>
 nnoremap <leader>p "0p
+vnoremap <leader>p "0p
 nnoremap <leader>y "+y
+vnoremap <leader>y "+y
 nnoremap <leader>h :%s/
 nnoremap <leader>o o<ESC>
 nnoremap <leader>O O<ESC>
@@ -209,6 +219,7 @@ nnoremap <leader>T :set shiftwidth
 " g Mapping ----------------------------------------------------------------
 
 nnoremap <silent>gp "*p
+vnoremap <silent>gp "*p
 
 " --------------------------------------------------------------------------
 
@@ -231,6 +242,8 @@ set splitbelow
 set splitright
 
 set signcolumn=yes
+
+set cmdheight=1
 
 " allow mouse control
 set mouse=a
@@ -270,6 +283,7 @@ set whichwrap+=<,h
 
 " Misc
 noremap 0 ^
+noremap - $
 noremap q %
 noremap Q q
 nnoremap Y y$
