@@ -218,8 +218,8 @@ nnoremap <leader>T :set shiftwidth
 
 " g Mapping ----------------------------------------------------------------
 
-nnoremap <silent>gp "*p
-vnoremap <silent>gp "*p
+nnoremap <silent>gp "+p
+vnoremap <silent>gp "+p
 
 " --------------------------------------------------------------------------
 
