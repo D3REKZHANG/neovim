@@ -1,77 +1,9 @@
 local db = require('dashboard')
- 
-db.custom_center = {
-  {
-    icon = '  ',
-    desc = 'New File            ',
-    action ='DashboardNewFile',
-    shortcut='SPC  n'
-  },
-  {
-    icon = '  ',
-    desc = 'Open File           ',
-    action =  'Telescope find_files',
-    shortcut='CTRL P'
-  },
-  {
-    icon = '  ',
-    desc = 'Open Config         ',
-    action = 'e $MYVIMRC',
-    shortcut = 'SPC  v',
-  },
-  {
-    icon = '  ',
-    desc = 'Update Plugins            ',
-    action = 'PlugUpdate',
-  },
-  {
-    icon = '  ',
-    desc = 'Edit Colorscheme    ',
-    action = 'Telescope colorscheme',
-    shortcut = 'SPC  9',
-  },
-}
 
-db.custom_footer = {
-  '',
-  '  Neovim > VSCode',
-}
-
-db.custom_header = {
+local header = {
     '',
-    '   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆         ',
-    '    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
-    '          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷⠄⠄⠄⠄⠻⠿⢿⣿⣧⣄     ',
-    '           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
-    '          ⢠⣿⣿⣿⠈  ⠡⠌⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
-    '   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘⠄ ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
-    '  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
-    ' ⣠⣿⠿⠛⠄⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
-    ' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄ ',
-    '      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
-    '       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
-    ''
-}
-
-db.custom_header2 = {
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗',
-  '████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║',
-  '██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║',
-  '██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║',
-  '██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║',
-  '╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝',
-  '',
-  '',
-}
-
-db.custom_header = {
+    '',
+    '',
     '',
     '          ▀████▀▄▄              ▄█ ',
     '            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ',
@@ -85,20 +17,55 @@ db.custom_header = {
     '',
 }
 
-db.custom_header3 = {
+local footer = {
   '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '███████╗ ██████╗ ██╗      █████╗ ██████╗     ██╗   ██╗██╗███╗   ███╗',
-  '██╔════╝██╔═══██╗██║     ██╔══██╗██╔══██╗    ██║   ██║██║████╗ ████║',
-  '███████╗██║   ██║██║     ███████║██████╔╝    ██║   ██║██║██╔████╔██║',
-  '╚════██║██║   ██║██║     ██╔══██║██╔══██╗    ╚██╗ ██╔╝██║██║╚██╔╝██║',
-  '███████║╚██████╔╝███████╗██║  ██║██║  ██║     ╚████╔╝ ██║██║ ╚═╝ ██║',
-  '╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝      ╚═══╝  ╚═╝╚═╝     ╚═╝',
-  '',
-  '',
+  '  Neovim > VSCode',
 }
+ 
+db.setup({
+  theme='doom',
+  config = {
+    header = header,
+    center = {
+      {
+        icon = '  ',
+        icon_hl = 'Title',
+        desc = 'New File            ',
+        action ='DashboardNewFile',
+        key='SPC  n',
+        key_hl='Number'
+      },
+      {
+        icon = '  ',
+        icon_hl = 'Title',
+        desc = 'Open File           ',
+        action =  'Telescope find_files',
+        key='CTRL P',
+        key_hl='Number'
+      },
+      {
+        icon = '  ',
+        icon_hl = 'Title',
+        desc = 'Open Config         ',
+        action = 'e $MYVIMRC',
+        key = 'SPC  v',
+        key_hl='Number'
+      },
+      {
+        icon = '  ',
+        icon_hl = 'Title',
+        desc = 'Update Plugins            ',
+        action = 'PlugUpdate',
+      },
+      {
+        icon = '  ',
+        icon_hl = 'Title',
+        desc = 'Edit Colorscheme    ',
+        action = 'Telescope colorscheme',
+        key = 'SPC  9',
+        key_hl='Number'
+      },
+    },
+    footer = footer,
+  }
+})

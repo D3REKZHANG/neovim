@@ -18,18 +18,19 @@ require("lualine").setup {
           -- padding = { left = 0, right = 0 },
         },
       },
-      lualine_b = { 'branch', 'diff' },
       lualine_c = {
-        'diagnostics',
         {
           'filename',
-          file_status = true, -- displays file status (readonly status, modified status)
+          file_status = false, -- displays file status (readonly status, modified status)
           path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
         },
       },
+      lualine_b = {
+        'diagnostics',
+      },
       lualine_x = { 'filetype' },
-      lualine_y = { 'location'},
-      lualine_z = { },
+      lualine_y = { 'branch', 'diff' },
+      lualine_z = { 'location'},
   }
 }
 
@@ -48,15 +49,26 @@ require("nvim-treesitter.configs").setup {
 
   require('aerial').setup({
   -- optionally use on_attach to set keymaps when aerial has attached to a buffer
-  on_attach = function(bufnr)
-    -- Jump forwards/backwards with '{' and '}'
-    vim.keymap.set('n', '<s-tab>', '<cmd>AerialPrev<CR>', {buffer = bufnr})
-    vim.keymap.set('n', '<tab>', '<cmd>AerialNext<CR>', {buffer = bufnr})
-  end
+  -- highlight_on_hover = true,
+  nav = {
+    autojump = true,
+  }
 })
 
 require('fine-cmdline').setup({
   cmdline = {
     prompt = ':'
   },
+})
+
+require("diffview").setup({
+  view = {
+    default = {
+      layout = "diff2_horizontal",
+    },
+  }
+})
+
+require("catppuccin").setup({
+  flavour = "macchiato", -- latte, frappe, macchiato, mocha
 })

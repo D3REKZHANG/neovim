@@ -1,12 +1,8 @@
 require("bufferline").setup{
     options = {
         offsets = {
-          {
-            filetype = "NvimTree",
-            text="File Explorer",
-            text_align = "left",
-            separator = false,
-          }
+          { filetype = "NvimTree", text="File Explorer", text_align = "left", separator = false },
+          { filetype = "neo-tree", text = "Explorer", padding = 1 },
         },
 
         diagnostics = "nvim_lsp",

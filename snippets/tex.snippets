@@ -5,24 +5,46 @@ snippet tex Basic latex template for assignments
 	\topmargin -1.1cm
 
 	\usepackage{amsfonts,amsmath,amssymb,enumerate,mathtools, multicol}
+	\usepackage[svgnames]{xcolor}
 	\usepackage[margin=0.7in]{geometry}
 
 	\newcommand{\R}{\mathbb R}
 	\newcommand{\N}{\mathbb R}
 	\newcommand{\Z}{\mathbb Z}
-	\newcommand{\C}{\mathbb C}
+	\newcommand{\thetaH}{\hat{\theta}}
+	\newcommand{\ybar}{\overline{y}}
+	\newcommand{\Ybar}{\overline{Y}}
+	\newcommand{\code}[1]{\colorbox{gray!20}{\texttt{#1}}}
 
 	\begin{document}
 	\parindent=0pt
 	\setlength{\parskip}{1.5ex}
 
-	\textbf{${1} Spring 2022: Assignment ${2} \\\Derek Zhang (20890999)\\\ ${3}, 2022}
+	\textbf{${1} Winter 2023: Assignment ${2} \\\Derek Zhang (20890999)\\\ ${3}, 2023} \\\
+	\noindent\rule{\textwidth}{0.4pt}
 
 	${0}
 
 	\end{document}
 
-snippet enumerate
+snippet en
 	\begin{enumerate}[(a)]
-		${0}
+		$0
 	\end{enumerate}
+
+snippet al
+	\begin{align}
+		$0
+	\end{align}
+
+snippet ;
+	\nonumber \\\
+	$0
+
+snippet dm "display math"
+	\[
+		$0
+	\]
+
+snippet // "Fraction"
+	\\frac{$1}{$2}

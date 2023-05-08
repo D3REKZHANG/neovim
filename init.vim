@@ -11,10 +11,13 @@ if !exists('g:vscode')
   Plug 'AhmedAbdulrahman/vim-aylin'
   Plug 'drewtempelmeyer/palenight.vim'
   Plug 'sainnhe/everforest'
+  Plug 'sainnhe/edge'
   Plug 'EdenEast/nightfox.nvim'
   Plug 'rmehri01/onenord.nvim', { 'branch': 'main' }
   Plug 'NLKNguyen/papercolor-theme'
   Plug 'mhartington/oceanic-next'
+  Plug 'projekt0n/github-nvim-theme', { 'tag': 'v0.0.7' }
+  Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
   " Utility
   "   Vimscript
@@ -23,9 +26,8 @@ if !exists('g:vscode')
   Plug 'dstein64/vim-startuptime'
   Plug 'voldikss/vim-floaterm'
   Plug 'tpope/vim-surround'
-  Plug 'Raimondi/delimitMate'
+  " Plug 'Raimondi/delimitMate'
   Plug 'lervag/vimtex'
-  Plug 'turbio/bracey.vim'
 
   Plug 'ryanoasis/vim-devicons'
   Plug 'kyazdani42/nvim-web-devicons'
@@ -39,7 +41,8 @@ if !exists('g:vscode')
 
   "   Lua
   Plug 'nvim-lualine/lualine.nvim'
-  Plug 'kyazdani42/nvim-tree.lua'
+  " Plug 'kyazdani42/nvim-tree.lua'
+  Plug 'nvim-neo-tree/neo-tree.nvim'
   Plug 'akinsho/nvim-bufferline.lua'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'nvim-lua/plenary.nvim'
@@ -57,6 +60,7 @@ if !exists('g:vscode')
   Plug 'L3MON4D3/LuaSnip'
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+  " Plug 'preservim/vim-markdown'
   Plug 'onsails/lspkind.nvim'
   Plug 'glepnir/dashboard-nvim'
   Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
@@ -70,7 +74,6 @@ if !exists('g:vscode')
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'ray-x/lsp_signature.nvim'
   Plug 'fgheng/winbar.nvim'
-  Plug 'SmiteshP/nvim-navic'
   Plug 'smjonas/inc-rename.nvim'
   " Plug 'jose-elias-alvarez/typescript.nvim'
   Plug 'stevearc/aerial.nvim'
@@ -78,6 +81,7 @@ if !exists('g:vscode')
   Plug 'MunifTanjim/nui.nvim'
   Plug 'VonHeikemen/fine-cmdline.nvim'
   Plug 'ggandor/leap.nvim'
+  Plug 'dylanaraps/wal.vim'
 
   call plug#end()
 endif
@@ -105,6 +109,7 @@ if !exists('g:vscode')
     \'Underfull',
     \]
   let g:vimtex_matchparen_enabled = 0
+  set conceallevel=0
 
   let g:delimitMate_expand_cr = 1
   let g:delimitMate_expand_space = 1
@@ -114,6 +119,9 @@ if !exists('g:vscode')
   let g:floaterm_wintype = 'normal'
   if has("win32")
     let g:floaterm_shell = 'powershell.exe -NoLogo'
+  endif
+  if has("linux")
+    let g:floaterm_shell = 'zsh'
   endif
   tnoremap <ESC> <C-\><C-n>:FloatermToggle<CR>
 
@@ -132,15 +140,16 @@ if !exists('g:vscode')
   let g:nord_underline = 0
   let g:nord_italic = v:false
   let g:everforest_disable_italic_comment = 1
-  let g:everforest_background = "hard"
-  colorscheme onenord
+  let g:everforest_background = "medium"
+  colorscheme catppuccin
+  set background=dark
 
-  highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
-  highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
-  highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
-  highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
-  highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
-  highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+  hi! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+  hi! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+  hi! CmpItemKindFunction guibg=NONE guifg=#C586C0
+  hi! CmpItemKindMethod guibg=NONE guifg=#C586C0
+  hi! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+  hi! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
   hi hlgroup gui=underline
   hi NvimTreeRootFolder guifg=FG 
 
@@ -158,17 +167,20 @@ lua << EOF
   require("user.lsp")
   require("user.dashboard")
   require("user.telescope")
-  require("user.nvim-tree")
+  -- require("user.nvim-tree")
+  require("user.neo-tree")
   require("user.bufferline")
   require("user.others")
 EOF
-"{ left = '', right = ''
-"{ left = '', right = ''}
+" { left = '', right = ''
+" { left = '', right = ''}
 endif
 
-hi NormalFloat guibg=synIDattr(synIDtrans(hlID("Normal")), "bg#")
-hi FloatBorder guibg=synIDattr(synIDtrans(hlID("Normal")), "bg#")
-hi NvimTreeWinSeparator guifg=#2e3440 guibg=#2e3440
+" hi Normal guibg=NONE
+" hi NormalFloat guibg=synIDattr(synIDtrans(hlID("Normal")), "bg#")
+" hi FloatBorder guibg=synIDattr(synIDtrans(hlID("Normal")), "bg#")
+" hi NvimTreeWinSeparator guifg=#2e3440 guibg=#2e3440
+" hi BufferLineFill guibg=#222730
 
 " ---------------------------------------------------------------------------
 
@@ -178,15 +190,16 @@ let mapleader = " "
 if exists('g:vscode')
   nnoremap <leader>w :call VSCodeCall('workbench.action.files.save')<CR>
 else
-  nnoremap <leader>w :w<CR>
+  nnoremap <silent><leader>w :w<CR>
   nnoremap <silent><leader>t :FloatermToggle<CR>
   nnoremap <silent><leader><Tab> :BufferLinePick<CR>
   nnoremap <silent><leader>q :Bdelete<CR>
   nnoremap <silent><C-p> :Telescope find_files<CR>
   nnoremap <silent><C-l> :Telescope live_grep<CR>
   nnoremap <silent><leader>b :Telescope buffers<CR>
-  nnoremap <silent><leader>e :NvimTreeToggle<CR>
+  nnoremap <silent><leader>e :Neotree toggle<CR>
   nnoremap <silent><leader>z <C-^>
+  nnoremap <silent><leader>x :ClangdSwitchSourceHeader<CR>
 
   nnoremap <silent><leader>2 :ZenMode<CR>
   nnoremap <silent><leader>3 :DiffviewOpen<CR>
@@ -197,7 +210,7 @@ else
   nnoremap <silent><leader>8 :Gitsigns toggle_signs<CR>
   nnoremap <silent><leader>9 :Telescope colorscheme<CR>
   nnoremap <silent><leader>db :DBUIToggle<CR>
-  nnoremap <silent><leader>a :AerialToggle!<CR>
+  nnoremap <silent><leader>a :AerialToggle<CR>
   nnoremap <leader>r :IncRename<space>
 
   nnoremap <leader>cc :GitConflictChoose
@@ -220,6 +233,7 @@ nnoremap <leader>T :set shiftwidth
 
 nnoremap <silent>gp "+p
 vnoremap <silent>gp "+p
+inoremap <silent><C-v> <esc>"0pa
 
 " --------------------------------------------------------------------------
 
@@ -320,7 +334,9 @@ if (empty($TMUX))
     endif
 endif
 
+
 " Functions
+set textwidth=100
 function! SetColorCol()
   if &colorcolumn==""
     set colorcolumn=100
@@ -339,3 +355,5 @@ function! SynGroup()
     let l:s = synID(line('.'), col('.'), 1)
     echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
+
+" lua vim.diagnostic.disable()
