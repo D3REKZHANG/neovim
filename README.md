@@ -6,11 +6,11 @@ I started using Vim/Neovim in Fall 2020 (CS 1A) when I bought a 60% mechanical k
 
 ## Notes
 Favourite Plugins
-- `nvim-tree` is a super fast tree written in lua with nice aesthetics (also has sidebar offset feature which is huge for that traditional ide feel)
+- `neotree` is a tree written in lua with nice aesthetics (also has sidebar offset feature which is huge for that traditional ide feel)
 - `telescope` clean fuzzy finder for file navigation (think vscode ctrl-p)
-- `vim-airline` awesome status bar that's easily customizable and has lots of themes from `vim-airline-themes`
+- `lualine` awesome status bar that's easily customizable
 - `vim-smoothie` makes scrolling with `<ctrl-d> <ctrl-u>` usable
-- `coc.vim` Language server for autocompletion, go-to-definition, etc. Looking to switch to native Neovim LSP soon
+- `nvim-lspconfig` for language server protocol
 
 Notable Rebinds:
 - `<space>` as leader key makes custom keybinds so easy to hit. (i.e. `<space>w` for `:w`) 
@@ -20,10 +20,16 @@ Notable Rebinds:
 Also has full mouse support (scroll, can open files from tree, close buffers in the tabline, etc). I know this is an anti-pattern, but its nice to scroll around with the mouse sometimes and it's also convenient when others want to use my computer.
 
 ## Screenshots
-![image](https://user-images.githubusercontent.com/20462187/125180847-01392680-e1cd-11eb-974c-a570e989c612.png)
+![image](https://github.com/D3REKZHANG/neovim/assets/20462187/619dee44-bf5f-4743-ab03-169d59c21799)
 
-![image](https://user-images.githubusercontent.com/20462187/125180890-5412de00-e1cd-11eb-94ac-643d5bd17c3d.png)
+![image](https://github.com/D3REKZHANG/neovim/assets/20462187/72066a68-dadb-45e6-a000-79a9d87a39b9)
 
-![image](https://user-images.githubusercontent.com/20462187/125180900-6db42580-e1cd-11eb-88f2-1050d9d4d82c.png)
+![image](https://github.com/D3REKZHANG/neovim/assets/20462187/aeee9bac-ecfe-440d-8b15-86dbe6029f39)
+
+![image](https://github.com/D3REKZHANG/neovim/assets/20462187/51f1a987-32cd-4aa4-aa1c-b1c434675ab7)
+
+![image](https://github.com/D3REKZHANG/neovim/assets/20462187/86d7b74b-dcc4-4057-8068-7a396e835c1f)
+
+![image](https://github.com/D3REKZHANG/neovim/assets/20462187/3b0e3150-b989-4363-b37d-6a628e82839b)
 
 
