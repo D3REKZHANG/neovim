@@ -26,6 +26,8 @@ Also has full mouse support (scroll, can open files from tree, close buffers in 
 
 ![image](https://github.com/D3REKZHANG/neovim/assets/20462187/aeee9bac-ecfe-440d-8b15-86dbe6029f39)
 
+![image](https://github.com/D3REKZHANG/neovim/assets/20462187/dd82d17e-3c35-494a-93f3-7bdb51cf7477)
+
 ![image](https://github.com/D3REKZHANG/neovim/assets/20462187/51f1a987-32cd-4aa4-aa1c-b1c434675ab7)
 
 ![image](https://github.com/D3REKZHANG/neovim/assets/20462187/86d7b74b-dcc4-4057-8068-7a396e835c1f)
