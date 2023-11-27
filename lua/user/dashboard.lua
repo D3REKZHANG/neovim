@@ -19,7 +19,7 @@ local header = {
 
 local footer = {
   '',
-  '  Neovim > VSCode',
+  '  yert',
 }
  
 db.setup({

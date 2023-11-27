@@ -56,10 +56,10 @@ if !exists('g:vscode')
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-cmdline'
-  Plug 'hrsh7th/nvim-cmp'
   Plug 'L3MON4D3/LuaSnip'
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+  Plug 'hrsh7th/nvim-cmp'
   " Plug 'preservim/vim-markdown'
   Plug 'onsails/lspkind.nvim'
   Plug 'glepnir/dashboard-nvim'
@@ -82,6 +82,10 @@ if !exists('g:vscode')
   Plug 'VonHeikemen/fine-cmdline.nvim'
   Plug 'ggandor/leap.nvim'
   Plug 'dylanaraps/wal.vim'
+  Plug 'xiyaowong/transparent.nvim'
+  Plug 'luckasRanarison/tree-sitter-hypr'
+  Plug 'jose-elias-alvarez/null-ls.nvim'
+  Plug 'MunifTanjim/prettier.nvim'
 
   call plug#end()
 endif
@@ -140,8 +144,8 @@ if !exists('g:vscode')
   let g:nord_underline = 0
   let g:nord_italic = v:false
   let g:everforest_disable_italic_comment = 1
-  let g:everforest_background = "medium"
-  colorscheme catppuccin
+  let g:everforest_background = "hard"
+  colorscheme everforest
   set background=dark
 
   hi! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
@@ -170,6 +174,7 @@ lua << EOF
   -- require("user.nvim-tree")
   require("user.neo-tree")
   require("user.bufferline")
+  require("user.prettier")
   require("user.others")
 EOF
 " { left = '', right = ''
@@ -178,7 +183,7 @@ endif
 
 " hi Normal guibg=NONE
 " hi NormalFloat guibg=synIDattr(synIDtrans(hlID("Normal")), "bg#")
-" hi FloatBorder guibg=synIDattr(synIDtrans(hlID("Normal")), "bg#")
+hi FloatBorder guibg=NONE
 " hi NvimTreeWinSeparator guifg=#2e3440 guibg=#2e3440
 " hi BufferLineFill guibg=#222730
 
@@ -305,8 +310,8 @@ nnoremap Y y$
 " Indent
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
-nnoremap <Tab> >>
-nnoremap <S-Tab> <<
+" nnoremap <Tab> >>
+" nnoremap <S-Tab> <<
 vnoremap > >gv
 vnoremap < <gv
 

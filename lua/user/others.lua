@@ -47,7 +47,17 @@ require("nvim-treesitter.configs").setup {
   },
 }
 
-  require('aerial').setup({
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.hypr = {
+  install_info = {
+    url = "https://github.com/luckasRanarison/tree-sitter-hypr",
+    files = { "src/parser.c" },
+    branch = "master",
+  },
+  filetype = "hypr",
+}
+
+require('aerial').setup({
   -- optionally use on_attach to set keymaps when aerial has attached to a buffer
   -- highlight_on_hover = true,
   nav = {
@@ -71,4 +81,11 @@ require("diffview").setup({
 
 require("catppuccin").setup({
   flavour = "macchiato", -- latte, frappe, macchiato, mocha
+})
+
+require("transparent").setup({
+  extra_groups = {
+    "NormalFloat", -- plugins which have float panel such as Lazy, Mason, LspInfo
+    "TelescopeNormal",
+  },
 })
