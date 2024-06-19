@@ -19,7 +19,7 @@ local header = {
 
 local footer = {
   '',
-  '  yert',
+  '  We chilling',
 }
  
 db.setup({
@@ -31,7 +31,7 @@ db.setup({
         icon = '  ',
         icon_hl = 'Title',
         desc = 'New File            ',
-        action ='DashboardNewFile',
+        action ='enew',
         key='SPC  n',
         key_hl='Number'
       },

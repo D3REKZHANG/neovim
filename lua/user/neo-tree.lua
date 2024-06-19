@@ -42,7 +42,7 @@ neo_tree.setup({
 		},
 	},
 	window = {
-		width = 30,
+		width = 35,
     mapping_options = {
       noremap=true
     },

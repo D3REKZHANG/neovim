@@ -1,0 +1,103 @@
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+	'lewis6991/impatient.nvim',
+	'joshdick/onedark.vim',
+	'mangeshrex/everblush.vim',
+	'arcticicestudio/nord-vim',
+	'AhmedAbdulrahman/vim-aylin',
+	'drewtempelmeyer/palenight.vim',
+	'sainnhe/everforest',
+	'sainnhe/edge',
+	'EdenEast/nightfox.nvim',
+	{ 'rmehri01/onenord.nvim', branch= 'main' },
+	'NLKNguyen/papercolor-theme',
+	'mhartington/oceanic-next',
+	{'projekt0n/github-nvim-theme', tag= 'v0.0.7' },
+	{'catppuccin/nvim', as= 'catppuccin' },
+	'junegunn/goyo.vim',
+	'psliwka/vim-smoothie',
+	'dstein64/vim-startuptime',
+	'voldikss/vim-floaterm',
+	'tpope/vim-surround',
+	'lervag/vimtex',
+	'ryanoasis/vim-devicons',
+	'kyazdani42/nvim-web-devicons',
+	'tpope/vim-fugitive',
+	'tpope/vim-dadbod',
+	'kristijanhusak/vim-dadbod-completion',
+	'kristijanhusak/vim-dadbod-ui',
+	'nvim-lualine/lualine.nvim',
+	'nvim-neo-tree/neo-tree.nvim',
+	'akinsho/nvim-bufferline.lua',
+	'lukas-reineke/indent-blankline.nvim',
+	'nvim-lua/plenary.nvim',
+	'nvim-lua/popup.nvim',
+	'nvim-telescope/telescope.nvim',
+	'nvim-telescope/telescope-ui-select.nvim',
+	{'nvim-treesitter/nvim-treesitter', build= ':TSUpdate'},
+	'neovim/nvim-lspconfig',
+	'williamboman/nvim-lsp-installer',
+	'hrsh7th/cmp-nvim-lsp',
+	'hrsh7th/cmp-buffer',
+	'hrsh7th/cmp-path',
+	'hrsh7th/cmp-cmdline',
+	'L3MON4D3/LuaSnip',
+	'saadparwaiz1/cmp_luasnip',
+	{ 'iamcco/markdown-preview.nvim', build= 'cd app && yarn install'},
+	'hrsh7th/nvim-cmp',
+	'onsails/lspkind.nvim',
+	'glepnir/dashboard-nvim',
+	{ 'sakhnik/nvim-gdb', build= ':!./install.sh' },
+	'famiu/bufdelete.nvim',
+	'folke/trouble.nvim',
+	{ 'akinsho/git-conflict.nvim', tag = '*' },
+	'f-person/git-blame.nvim',
+	'sindrets/diffview.nvim',
+	'folke/zen-mode.nvim',
+	'numToStr/Comment.nvim',
+	'lewis6991/gitsigns.nvim',
+	'ray-x/lsp_signature.nvim',
+	'fgheng/winbar.nvim',
+	'smjonas/inc-rename.nvim',
+	'stevearc/aerial.nvim',
+	'MunifTanjim/nui.nvim',
+	'VonHeikemen/fine-cmdline.nvim',
+	'ggandor/leap.nvim',
+	'dylanaraps/wal.vim',
+	'xiyaowong/transparent.nvim',
+	'luckasRanarison/tree-sitter-hypr',
+	'jose-elias-alvarez/null-ls.nvim',
+	'MunifTanjim/prettier.nvim',
+})
+
+-- require("luasnip.loaders.from_snipmate").lazy_load()
+-- require("Comment").setup{}
+-- require('gitsigns').setup()
+-- require('lsp_signature').setup()
+-- require("trouble").setup{}
+-- require('git-conflict').setup{}
+-- require('inc_rename').setup{}
+-- require('leap').add_default_mappings{}
+
+require("user.cmp")
+require("user.lsp")
+require("user.dashboard")
+require("user.telescope")
+-- require("user.nvim-tree")
+require("user.neo-tree")
+require("user.bufferline")
+require("user.prettier")
+require("user.others")
+

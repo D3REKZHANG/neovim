@@ -18,16 +18,20 @@ if !exists('g:vscode')
   Plug 'mhartington/oceanic-next'
   Plug 'projekt0n/github-nvim-theme', { 'tag': 'v0.0.7' }
   Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+  Plug 'AlexvZyl/nordic.nvim', { 'branch': 'main' }
+  Plug 'savq/melange-nvim'
 
   " Utility
   "   Vimscript
   Plug 'junegunn/goyo.vim'
-  Plug 'psliwka/vim-smoothie'
+  " Plug 'psliwka/vim-smoothie'
   Plug 'dstein64/vim-startuptime'
   Plug 'voldikss/vim-floaterm'
   Plug 'tpope/vim-surround'
   " Plug 'Raimondi/delimitMate'
   Plug 'lervag/vimtex'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'tpope/vim-obsession'
 
   Plug 'ryanoasis/vim-devicons'
   Plug 'kyazdani42/nvim-web-devicons'
@@ -51,7 +55,8 @@ if !exists('g:vscode')
   Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
-  Plug 'williamboman/nvim-lsp-installer'
+  Plug 'williamboman/mason-lspconfig.nvim'
+  Plug 'williamboman/mason.nvim'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
@@ -65,11 +70,12 @@ if !exists('g:vscode')
   Plug 'glepnir/dashboard-nvim'
   Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
   Plug 'famiu/bufdelete.nvim'
-  Plug 'folke/trouble.nvim'
   Plug 'akinsho/git-conflict.nvim', { 'tag' : '*' }
   Plug 'f-person/git-blame.nvim'
   Plug 'sindrets/diffview.nvim'
+  Plug 'folke/trouble.nvim'
   Plug 'folke/zen-mode.nvim'
+  Plug 'folke/noice.nvim'
   Plug 'numToStr/Comment.nvim'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'ray-x/lsp_signature.nvim'
@@ -86,6 +92,12 @@ if !exists('g:vscode')
   Plug 'luckasRanarison/tree-sitter-hypr'
   Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'MunifTanjim/prettier.nvim'
+  Plug 'rcarriga/nvim-notify'
+  Plug 'kawre/leetcode.nvim'
+  Plug 'nacro90/numb.nvim'
+  Plug 'karb94/neoscroll.nvim'
+  Plug 'ThePrimeagen/harpoon'
+  Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
   call plug#end()
 endif
@@ -121,6 +133,8 @@ if !exists('g:vscode')
   let g:floaterm_autoclose=1
   let g:floaterm_title=""
   let g:floaterm_wintype = 'normal'
+  let g:floaterm_width = 0.7
+  let g:floaterm_height = 0.7
   if has("win32")
     let g:floaterm_shell = 'powershell.exe -NoLogo'
   endif
@@ -145,7 +159,7 @@ if !exists('g:vscode')
   let g:nord_italic = v:false
   let g:everforest_disable_italic_comment = 1
   let g:everforest_background = "hard"
-  colorscheme everforest
+  colorscheme onenord
   set background=dark
 
   hi! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
@@ -165,6 +179,24 @@ lua << EOF
   require("trouble").setup{}
   require('git-conflict').setup{}
   require('inc_rename').setup{}
+  require('mason').setup{}
+  require("mason-lspconfig").setup()
+  require("leetcode").setup({
+    injector = { ---@type table<lc.lang, lc.inject>
+        ["cpp"] = {
+            before = { "#include <bits/stdc++.h>", "using namespace std;" },
+            after = "int main() {}",
+        }
+    }
+  })
+  require("notify").setup({
+    background_colour = "#000000",
+  })
+  require('numb').setup()
+  require('neoscroll').setup({
+    easing_function = "quadratic",
+  })
+  require("toggleterm").setup()
   -- require('leap').add_default_mappings{}
 
   require("user.cmp")
@@ -200,14 +232,16 @@ else
   nnoremap <silent><leader><Tab> :BufferLinePick<CR>
   nnoremap <silent><leader>q :Bdelete<CR>
   nnoremap <silent><C-p> :Telescope find_files<CR>
-  nnoremap <silent><C-l> :Telescope live_grep<CR>
+  nnoremap <silent><leader>l :Telescope live_grep<CR>
+  nnoremap <silent><C-b> :lua require("harpoon.ui").toggle_quick_menu()<CR>
   nnoremap <silent><leader>b :Telescope buffers<CR>
   nnoremap <silent><leader>e :Neotree toggle<CR>
   nnoremap <silent><leader>z <C-^>
   nnoremap <silent><leader>x :ClangdSwitchSourceHeader<CR>
+  nnoremap <silent><C-m> :lua require("harpoon.mark").add_file()<CR>
 
-  nnoremap <silent><leader>2 :ZenMode<CR>
-  nnoremap <silent><leader>3 :DiffviewOpen<CR>
+  nnoremap <silent><leader>2 :call ToggleTabWidth()<CR>
+  nnoremap <silent><leader>3 :call ToggleDiffview()<CR>
   nnoremap <silent><leader>4 :GitBlameToggle<CR>
   nnoremap <silent><leader>5 :set relativenumber!<CR>
   nnoremap <silent><leader>6 :call SetColorCol()<CR>
@@ -232,13 +266,13 @@ vnoremap <leader>y "+y
 nnoremap <leader>h :%s/
 nnoremap <leader>o o<ESC>
 nnoremap <leader>O O<ESC>
-nnoremap <leader>T :set shiftwidth 
+nnoremap <leader>T :set shiftwidth=
 
 " g Mapping ----------------------------------------------------------------
 
 nnoremap <silent>gp "+p
 vnoremap <silent>gp "+p
-inoremap <silent><C-v> <esc>"0pa
+inoremap <silent><C-v> <esc>"+pa
 
 " --------------------------------------------------------------------------
 
@@ -267,13 +301,18 @@ set cmdheight=1
 " allow mouse control
 set mouse=a
 
+" nnoremap : <cmd>FineCmdline<CR>
+
 " scrolling
-nnoremap <C-D> <cmd>call smoothie#do("\<C-D>") <CR>
-vnoremap <C-D> <cmd>call smoothie#do("\<C-D>") <CR>
-nnoremap <C-U> <cmd>call smoothie#do("\<C-U>") <CR>
-vnoremap <C-U> <cmd>call smoothie#do("\<C-U>") <CR>
+" nnoremap <C-D> <cmd>call smoothie#do("25\<C-D>") <CR>
+" vnoremap <C-D> <cmd>call smoothie#do("25\<C-D>") <CR>
+" nnoremap <C-U> <cmd>call smoothie#do("25\<C-U>") <CR>
+" vnoremap <C-U> <cmd>call smoothie#do("25\<C-U>") <CR>
 nnoremap <C-E> 2<C-E> <CR>
 nnoremap <C-Y> 2<C-Y> <CR>
+
+nnoremap <silent> } :<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>
+nnoremap <silent> { :<C-u>execute "keepjumps norm! " . v:count1 . "{"<CR>
 
 " buffer control
 nnoremap th :bp<CR>
@@ -293,8 +332,8 @@ inoremap <C-j> <C-n>
 inoremap <C-k> <C-p>
 
 " move line up/down
-nnoremap <C-j> :m .+1<cr>==
-nnoremap <C-k> :m .-2<cr>==
+nnoremap <C-Down> :m .+1<cr>==
+nnoremap <C-Up> :m .-2<cr>==
 
 " wrap movement across lines
 set whichwrap+=>,l
@@ -360,5 +399,30 @@ function! SynGroup()
     let l:s = synID(line('.'), col('.'), 1)
     echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
+
+" For toggling DiffView.nvim
+let s:diffview_open = 0
+
+function! ToggleDiffview()
+    if s:diffview_open
+        DiffviewClose
+        let s:diffview_open = 0
+    else
+        DiffviewOpen
+        let s:diffview_open = 1
+    endif
+endfunction
+
+" For toggling tab width
+function! ToggleTabWidth()
+    let x = &shiftwidth
+    if x == 4
+        set shiftwidth=2
+        set tabstop=2
+    else
+        set shiftwidth=4
+        set tabstop=4
+    endif
+endfunction
 
 " lua vim.diagnostic.disable()

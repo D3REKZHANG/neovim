@@ -1,4 +1,4 @@
-local cmp = require'cmp'
+local cmp = require('cmp')
 local lspkind = require('lspkind')
 local luasnip = require('luasnip')
 
@@ -19,8 +19,8 @@ cmp.setup({
     end,
   },
   window = {
-  --  completion = cmp.config.window.bordered(),
-  --  documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   
   mapping = {
